@@ -19,6 +19,9 @@
   <!-- html2canvas for instant Wish Card & Invitation JPEG downloads -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
+  <!-- Canvas Confetti for Rich Interactive Celebrations, Flowers & Poppers -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
   <script>
     tailwind.config = {
       theme: {
@@ -119,6 +122,15 @@
       pointer-events: none;
     }
 
+    /* Audio Equalizer Wave Animation */
+    @keyframes eqBarBounce {
+      0%, 100% { height: 4px; }
+      50% { height: 13px; }
+    }
+    .eq-bar-1 { animation: eqBarBounce 0.7s ease-in-out infinite; }
+    .eq-bar-2 { animation: eqBarBounce 0.5s ease-in-out infinite 0.15s; }
+    .eq-bar-3 { animation: eqBarBounce 0.8s ease-in-out infinite 0.3s; }
+
     /* Custom Wish Card Theme Styles */
     .theme-gold { background: linear-gradient(135deg, #FFFDF8, #FBF6E9); border: 2px solid #C59B27; color: #721C24; }
     .theme-maroon { background: linear-gradient(135deg, #58181F, #721C24); border: 2px solid #D4AF37; color: #FFF8EB; }
@@ -137,25 +149,25 @@
 
 <body class="bg-ivory text-charcoal font-sans overflow-x-hidden antialiased selection:bg-lightGold selection:text-royalMaroon">
 
+  <!-- HTML5 Background Audio Element (Sajna Song) -->
+  <audio id="weddingAudio" src="assets/Sajna.mp3" loop preload="auto"></audio>
+
   <!-- ========================================================
-       TOP MUSIC & UTILITY BAR (SPOTIFY / YT MUSIC INTEGRATION)
+       TOP MUSIC & UTILITY BAR
        ======================================================== -->
   <div class="fixed top-3 right-3 sm:top-4 sm:right-4 z-50 flex items-center space-x-2 bg-white/95 backdrop-blur-md px-3 sm:px-4 py-2 rounded-full border border-goldFoil/40 shadow-card">
     
-    <!-- Music Player Toggle Button -->
-    <button id="musicToggleBtn" onclick="toggleWeddingMusic()" class="text-royalMaroon hover:text-goldFoil transition flex items-center gap-1.5 sm:gap-2 text-xs font-semibold">
-      <i id="musicIcon" class="fa-solid fa-volume-high text-goldFoil animate-pulse"></i>
-      <span id="musicStatus" class="tracking-wider uppercase text-[10px] sm:text-xs">Music ON</span>
+    <!-- Music Player Toggle Button (Plays Sajna) -->
+    <button id="musicToggleBtn" onclick="toggleWeddingMusic()" title="Play / Pause Wedding Song: Sajna" class="text-royalMaroon hover:text-goldFoil transition flex items-center gap-1.5 sm:gap-2 text-xs font-semibold">
+      <div id="soundEqBars" class="flex items-end gap-0.5 h-3.5 pb-0.5">
+        <span class="w-0.5 bg-goldFoil rounded-full eq-bar-1 h-3"></span>
+        <span class="w-0.5 bg-goldFoil rounded-full eq-bar-2 h-2"></span>
+        <span class="w-0.5 bg-goldFoil rounded-full eq-bar-3 h-3.5"></span>
+      </div>
+      <i id="musicIcon" class="fa-solid fa-music text-goldFoil animate-pulse"></i>
+      <span id="musicStatus" class="tracking-wider uppercase text-[10px] sm:text-xs">Sajna ON</span>
     </button>
     
-    <span class="text-goldFoil/30">|</span>
-    
-    <!-- Open Music Center Modal -->
-    <button onclick="openMusicCenterModal()" title="Change Songs or Open Spotify / YouTube Music" class="text-royalMaroon hover:text-goldFoil text-xs font-medium flex items-center gap-1 transition px-1.5 py-0.5 rounded-full hover:bg-ivory">
-      <i class="fa-solid fa-sliders text-goldFoil text-[11px]"></i>
-      <span class="text-[11px] font-semibold hidden md:inline">Songs</span>
-    </button>
-
     <span class="text-goldFoil/30">|</span>
 
     <!-- 2-Page Invitation Download Button -->
@@ -163,74 +175,6 @@
       <i class="fa-solid fa-file-arrow-down text-goldFoil text-[11px]"></i>
       <span class="text-[10px] sm:text-[11px]">2-Page PDF / Card</span>
     </button>
-  </div>
-
-
-  <!-- ========================================================
-       MUSIC CENTER MODAL (SPOTIFY & YOUTUBE MUSIC SELECTOR)
-       ======================================================== -->
-  <div id="musicCenterModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 hidden">
-    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full border border-goldFoil shadow-2xl relative space-y-5 animate-in fade-in duration-300">
-      
-      <button onclick="closeMusicCenterModal()" class="absolute top-4 right-4 text-subtleText hover:text-royalMaroon text-lg">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-      <div class="text-center space-y-1">
-        <div class="w-12 h-12 mx-auto rounded-full bg-haldiYellow text-goldFoil flex items-center justify-center text-xl shadow-sm border border-goldFoil/30">
-          <i class="fa-solid fa-music"></i>
-        </div>
-        <h3 class="font-serif text-2xl text-royalMaroon font-semibold">Wedding Music &amp; Audio</h3>
-        <p class="text-xs text-subtleText">Listen to auspicious wedding tracks or open playlists on your favourite app</p>
-      </div>
-
-      <!-- In-Page Audio Track Selector -->
-      <div class="bg-ivory p-4 rounded-2xl border border-goldFoil/30 space-y-3">
-        <label class="block text-[11px] uppercase font-bold text-royalMaroon tracking-wider">
-          <i class="fa-solid fa-play text-goldFoil mr-1"></i> Select In-Page Wedding Melody
-        </label>
-        <select id="songSelectDropdown" onchange="changeTrack(this.value)" class="w-full px-3 py-2 rounded-xl bg-white border border-goldFoil/40 text-charcoal text-xs font-medium focus:outline-none focus:border-goldFoil">
-          <option value="yaman" selected>1. Traditional Shehnai &amp; Sitar (Raag Yaman)</option>
-          <option value="dinshagna">2. Din Shagna Da (Bridal Entry Flute Harmony)</option>
-          <option value="kudmayi">3. Kudmayi &amp; Mangalyam (Auspicious Chants)</option>
-          <option value="dhol">4. Celebratory Haldi Dhol &amp; Tasha Rhythm</option>
-          <option value="sangeet">5. Sangeet Bollywood Rhythms &amp; Beats</option>
-        </select>
-        
-        <div class="flex items-center justify-between text-xs pt-1">
-          <button onclick="toggleWeddingMusic()" class="px-4 py-1.5 bg-royalMaroon text-white font-semibold rounded-full hover:bg-deepRose transition flex items-center gap-1.5 text-xs">
-            <i id="modalPlayBtnIcon" class="fa-solid fa-pause text-[10px]"></i> <span id="modalPlayBtnText">Playing Audio</span>
-          </button>
-          <span class="text-[11px] text-subtleText">High-Fidelity Audio Synth</span>
-        </div>
-      </div>
-
-      <!-- External Streaming App Shortcuts (Spotify & YouTube Music) -->
-      <div class="space-y-2">
-        <p class="text-[11px] uppercase font-bold text-subtleText tracking-wider text-center">Open Wedding Playlists on App</p>
-        
-        <div class="grid grid-cols-2 gap-3">
-          <!-- Spotify Link -->
-          <a href="https://open.spotify.com/search/indian%20wedding%20songs" target="_blank" rel="noopener noreferrer" class="p-3 bg-[#1DB954]/10 hover:bg-[#1DB954]/20 border border-[#1DB954]/40 rounded-2xl flex items-center justify-center gap-2 text-xs font-bold text-[#1DB954] transition shadow-sm">
-            <i class="fa-brands fa-spotify text-lg"></i>
-            <span>Spotify</span>
-          </a>
-
-          <!-- YouTube Music Link -->
-          <a href="https://music.youtube.com/search?q=indian+wedding+songs" target="_blank" rel="noopener noreferrer" class="p-3 bg-[#FF0000]/10 hover:bg-[#FF0000]/20 border border-[#FF0000]/40 rounded-2xl flex items-center justify-center gap-2 text-xs font-bold text-[#FF0000] transition shadow-sm">
-            <i class="fa-brands fa-youtube text-lg"></i>
-            <span>YT Music</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="text-center pt-1">
-        <button onclick="closeMusicCenterModal()" class="text-xs text-royalMaroon font-semibold underline hover:text-deepRose">
-          Return to Invitation
-        </button>
-      </div>
-
-    </div>
   </div>
 
 
@@ -733,7 +677,7 @@
 
 
   <!-- ========================================================
-       CUSTOMIZABLE WISH CARDS (10+ THEMES, LIVE PREVIEW & DOWNLOAD)
+       CUSTOMIZABLE WISH CARDS (12 THEMES, LIVE PREVIEW & DOWNLOAD)
        ======================================================== -->
   <section id="wishCardSection" class="relative z-10 py-12 px-4 max-w-5xl mx-auto">
     <div class="bg-white rounded-3xl p-6 sm:p-10 border border-goldFoil/40 shadow-royal space-y-8">
@@ -742,7 +686,7 @@
         <span class="font-cinzel text-xs uppercase tracking-[0.25em] text-goldFoil font-semibold">Special Feature</span>
         <h3 class="font-serif text-3xl sm:text-4xl text-royalMaroon">Create Your Wedding Blessing Card</h3>
         <p class="text-xs sm:text-sm text-subtleText max-w-lg mx-auto">
-          Choose from 12 curated royal aesthetic themes, write your message, and download your personalized high-resolution keepsake card!
+          Choose from 12 royal aesthetic themes with live flower showers, confetti poppers, and sparkles! Type your blessing and download your keepsake card!
         </p>
       </div>
 
@@ -768,13 +712,13 @@
 
           <div>
             <label class="block font-semibold text-charcoal mb-1">Song Dedication (Optional) &#127925;</label>
-            <input type="text" id="cardSongInput" oninput="updateWishCardLive()" placeholder="e.g. Din Shagna Da / Kesariya" value="Din Shagna Da" class="w-full px-3.5 py-2 rounded-xl bg-ivory border border-goldFoil/30 text-charcoal focus:outline-none focus:border-goldFoil"/>
+            <input type="text" id="cardSongInput" oninput="updateWishCardLive()" placeholder="e.g. Sajna / Din Shagna Da / Kesariya" value="Sajna" class="w-full px-3.5 py-2 rounded-xl bg-ivory border border-goldFoil/30 text-charcoal focus:outline-none focus:border-goldFoil"/>
           </div>
 
           <!-- 12 Theme Selection Pills -->
           <div>
             <label class="block font-bold text-royalMaroon mb-2 uppercase tracking-wider text-[11px]">
-              Select Card Theme (12 Styles):
+              Select Card Theme (12 Styles with Live Animations):
             </label>
             <div class="grid grid-cols-3 sm:grid-cols-4 gap-2">
               <button onclick="setCardTheme('gold')" class="theme-btn px-2 py-1.5 rounded-xl border text-[11px] font-medium bg-[#FFFDF8] border-goldFoil text-amber-900 shadow-sm active:scale-95 transition">🌟 Gold Foil</button>
@@ -806,35 +750,57 @@
 
         <!-- Right: Live Interactive Card Canvas Preview -->
         <div class="lg:col-span-6 flex flex-col items-center">
-          <div class="w-full max-w-sm">
-            <p class="text-[11px] font-semibold text-subtleText uppercase tracking-wider mb-2 text-center">
-              <i class="fa-solid fa-eye text-goldFoil mr-1"></i> Live Card Preview (Downloadable)
-            </p>
+          <div class="w-full max-w-sm space-y-2">
+            
+            <!-- Live Interactive Magic Buttons Bar -->
+            <div class="flex items-center justify-between bg-ivory px-3 py-1.5 rounded-2xl border border-goldFoil/30 shadow-sm">
+              <span class="text-[10px] uppercase font-bold text-royalMaroon tracking-wider"><i class="fa-solid fa-wand-magic-sparkles text-goldFoil"></i> Live Magic:</span>
+              <div class="flex items-center gap-1">
+                <button onclick="triggerCardFlowerShower()" title="Shower Fragrant Flowers" class="px-2 py-1 rounded-full bg-rose-100 hover:bg-rose-200 text-rose-800 text-[10px] font-semibold transition active:scale-95 flex items-center gap-1 shadow-xs">
+                  🌸 Flowers
+                </button>
+                <button onclick="triggerCardConfetti()" title="Pop Party Confetti" class="px-2 py-1 rounded-full bg-purple-100 hover:bg-purple-200 text-purple-800 text-[10px] font-semibold transition active:scale-95 flex items-center gap-1 shadow-xs">
+                  🎉 Poppers
+                </button>
+                <button onclick="triggerCardSparkles()" title="Golden Sparkle Magic" class="px-2 py-1 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-800 text-[10px] font-semibold transition active:scale-95 flex items-center gap-1 shadow-xs">
+                  ✨ Sparkles
+                </button>
+                <button onclick="triggerCardHearts()" title="Love Heart Shower" class="px-2 py-1 rounded-full bg-red-100 hover:bg-red-200 text-red-800 text-[10px] font-semibold transition active:scale-95 flex items-center gap-1 shadow-xs">
+                  💖 Hearts
+                </button>
+              </div>
+            </div>
 
             <!-- The Exportable Wish Card Node -->
             <div id="exportWishCard" class="theme-gold p-6 sm:p-8 rounded-3xl shadow-xl space-y-4 text-center relative overflow-hidden transition-all duration-300">
               
+              <!-- Dynamic Theme Corner Flourishes -->
+              <span id="cardThemeDecorTopLeft" class="absolute top-3 left-3 text-sm opacity-70 animate-pulse">✨</span>
+              <span id="cardThemeDecorTopRight" class="absolute top-3 right-3 text-sm opacity-70 animate-pulse">✨</span>
+              <span id="cardThemeDecorBottomLeft" class="absolute bottom-3 left-3 text-sm opacity-70 animate-pulse">✨</span>
+              <span id="cardThemeDecorBottomRight" class="absolute bottom-3 right-3 text-sm opacity-70 animate-pulse">✨</span>
+
               <!-- Subtle decorative crest -->
-              <div class="flex items-center justify-center gap-2">
-                <span class="text-xs opacity-60"><i class="fa-solid fa-om"></i></span>
+              <div class="flex items-center justify-center gap-2 relative z-10">
+                <span class="text-xs opacity-75"><i class="fa-solid fa-om"></i></span>
                 <span class="font-cinzel text-xs uppercase tracking-[0.2em] font-bold">Diksha &amp; Mohit Vivah</span>
-                <span class="text-xs opacity-60"><i class="fa-solid fa-heart"></i></span>
+                <span class="text-xs opacity-75"><i class="fa-solid fa-heart"></i></span>
               </div>
 
               <!-- Message Body -->
-              <div class="py-2">
+              <div class="py-2 relative z-10">
                 <p id="cardPreviewMsg" class="font-serif italic text-base sm:text-lg leading-relaxed">
                   "Wishing Diksha and Mohit a lifetime filled with unconditional love, boundless laughter, good health, and eternal prosperity!"
                 </p>
               </div>
 
               <!-- Song Tag if any -->
-              <div id="cardPreviewSongWrap" class="inline-block px-3 py-1 rounded-full bg-white/40 backdrop-blur-sm text-[10px] font-semibold border border-current/20">
-                <i class="fa-solid fa-music mr-1"></i> <span id="cardPreviewSong">Dedicated Song: Din Shagna Da</span>
+              <div id="cardPreviewSongWrap" class="inline-block px-3 py-1 rounded-full bg-white/40 backdrop-blur-sm text-[10px] font-semibold border border-current/20 relative z-10">
+                <i class="fa-solid fa-music mr-1"></i> <span id="cardPreviewSong">Dedicated Song: Sajna</span>
               </div>
 
               <!-- Sender Signature -->
-              <div class="pt-2 border-t border-current/20 space-y-0.5">
+              <div class="pt-2 border-t border-current/20 space-y-0.5 relative z-10">
                 <h5 id="cardPreviewName" class="font-serif text-lg font-bold">Priya Sharma</h5>
                 <p id="cardPreviewRelation" class="text-[10px] uppercase tracking-wider font-semibold opacity-75">Bride's Squad &hearts;</p>
                 <p class="text-[9px] opacity-60 tracking-widest font-mono">26-27 NOV 2026 &bull; BLESSINGS</p>
@@ -842,8 +808,18 @@
 
             </div>
 
-            <div class="mt-3 text-center">
+            <div class="mt-2 text-center">
               <button onclick="downloadCustomWishCardImage()" class="text-xs text-royalMaroon hover:text-goldFoil font-semibold flex items-center justify-center gap-1.5 mx-auto">
+                <i class="fa-solid fa-image text-goldFoil"></i> Download Wish Card as High-Res PNG
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
                 <i class="fa-solid fa-image"></i> Click to Download Card as PNG
               </button>
             </div>
@@ -1121,117 +1097,79 @@
       }
       if (audioCtx.state === 'suspended') {
         audioCtx.resume();
-      }
-    }
+  <!-- ========================================================
+       JAVASCRIPT LOGIC, SAJNA WEDDING AUDIO & LIVE CELEBRATIONS
+       ======================================================== -->
+  <script>
+    /* =========================================================
+       1. WEDDING AUDIO ENGINE (SAJNA SONG)
+       ========================================================= */
+    const weddingAudio = document.getElementById('weddingAudio');
+    let isPlayingAudio = false;
 
     function toggleWeddingMusic() {
-      initAudioContext();
       const icon = document.getElementById('musicIcon');
       const status = document.getElementById('musicStatus');
-      const modalIcon = document.getElementById('modalPlayBtnIcon');
-      const modalText = document.getElementById('modalPlayBtnText');
+      const eq = document.getElementById('soundEqBars');
 
-      if (!isPlayingAudio) {
-        isPlayingAudio = true;
-        if (icon) icon.className = "fa-solid fa-volume-high text-goldFoil animate-pulse";
-        if (status) status.innerText = "Music ON";
-        if (modalIcon) modalIcon.className = "fa-solid fa-pause text-[10px]";
-        if (modalText) modalText.innerText = "Playing Audio";
-        startWeddingMelody();
+      if (weddingAudio.paused) {
+        weddingAudio.play().then(() => {
+          isPlayingAudio = true;
+          if (icon) icon.className = "fa-solid fa-music text-goldFoil animate-pulse";
+          if (status) status.innerText = "Sajna ON";
+          if (eq) eq.style.opacity = '1';
+          showToast("🎵 Playing Wedding Song: Sajna");
+        }).catch(err => {
+          console.warn('Audio playback error:', err);
+          showToast("Click anywhere on screen to enable audio");
+        });
       } else {
+        weddingAudio.pause();
         isPlayingAudio = false;
         if (icon) icon.className = "fa-solid fa-volume-xmark text-subtleText";
         if (status) status.innerText = "Muted";
-        if (modalIcon) modalIcon.className = "fa-solid fa-play text-[10px]";
-        if (modalText) modalText.innerText = "Audio Paused";
-        if (musicInterval) clearInterval(musicInterval);
+        if (eq) eq.style.opacity = '0.3';
+        showToast("🔇 Music Muted");
       }
     }
 
-    function playTone(freq, type = 'sine', duration = 0.5, gainLevel = 0.1) {
-      if (!audioCtx || !isPlayingAudio) return;
-      try {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = type;
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(gainLevel, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + duration);
-      } catch (err) {
-        console.warn(err);
+    // Try playing on first user click anywhere on page if not already playing
+    document.addEventListener('click', function startAudioOnFirstTouch() {
+      if (weddingAudio.paused && !isPlayingAudio) {
+        weddingAudio.play().then(() => {
+          isPlayingAudio = true;
+          const icon = document.getElementById('musicIcon');
+          const status = document.getElementById('musicStatus');
+          const eq = document.getElementById('soundEqBars');
+          if (icon) icon.className = "fa-solid fa-music text-goldFoil animate-pulse";
+          if (status) status.innerText = "Sajna ON";
+          if (eq) eq.style.opacity = '1';
+        }).catch(() => {});
       }
-    }
-
-    function startWeddingMelody() {
-      const trackScales = {
-        yaman: [440, 493.88, 554.37, 622.25, 659.25, 739.99, 830.61, 880],
-        dinshagna: [523.25, 587.33, 659.25, 698.46, 783.99, 880, 987.77, 1046.50],
-        kudmayi: [392, 440, 493.88, 523.25, 587.33, 659.25, 783.99],
-        dhol: [110, 220, 110, 220, 165, 220, 110],
-        sangeet: [440, 554.37, 659.25, 880, 659.25, 554.37, 739.99]
-      };
-
-      const scale = trackScales[currentTrackType] || trackScales.yaman;
-      let step = 0;
-      if (musicInterval) clearInterval(musicInterval);
-
-      musicInterval = setInterval(() => {
-        if (!isPlayingAudio) return;
-        const note = scale[step % scale.length];
-        
-        if (currentTrackType === 'dhol') {
-          playTone(note, 'triangle', 0.2, 0.25);
-          if (step % 2 === 0) playTone(90, 'sine', 0.25, 0.3);
-        } else {
-          playTone(note, 'sine', 0.6, 0.05);
-          playTone(note * 1.5, 'triangle', 0.35, 0.02);
-        }
-        step++;
-      }, currentTrackType === 'dhol' ? 240 : 420);
-    }
-
-    function changeTrack(trackKey) {
-      currentTrackType = trackKey;
-      if (isPlayingAudio) {
-        startWeddingMelody();
-      }
-      showToast(`🎵 Switched Track: ${document.getElementById('songSelectDropdown').options[document.getElementById('songSelectDropdown').selectedIndex].text}`);
-    }
-
-    function openMusicCenterModal() {
-      document.getElementById('musicCenterModal').classList.remove('hidden');
-    }
-
-    function closeMusicCenterModal() {
-      document.getElementById('musicCenterModal').classList.add('hidden');
-    }
-
-    function playDholBeats() {
-      initAudioContext();
-      showToast("🥁 Live Dhol Rhythm Playing for Haldi!");
-      const beats = [110, 220, 110, 220, 110, 110, 220];
-      beats.forEach((freq, idx) => {
-        setTimeout(() => playTone(freq, 'triangle', 0.2, 0.25), idx * 160);
-      });
-    }
+      document.removeEventListener('click', startAudioOnFirstTouch);
+    }, { once: true });
 
 
     /* =========================================================
        2. ENVELOPE OPENING OVERLAY
        ======================================================== */
     function openWeddingInvitation() {
-      initAudioContext();
       const overlay = document.getElementById('envelopeOverlay');
-      startWeddingMelody();
+      
+      // Start Sajna music
+      weddingAudio.play().then(() => {
+        isPlayingAudio = true;
+        const icon = document.getElementById('musicIcon');
+        const status = document.getElementById('musicStatus');
+        const eq = document.getElementById('soundEqBars');
+        if (icon) icon.className = "fa-solid fa-music text-goldFoil animate-pulse";
+        if (status) status.innerText = "Sajna ON";
+        if (eq) eq.style.opacity = '1';
+      }).catch(err => console.log(err));
 
-      playTone(440, 'sine', 0.8, 0.2);
-      setTimeout(() => playTone(554, 'sine', 1.0, 0.2), 250);
-
-      for (let i = 0; i < 35; i++) {
+      // Grand Celebratory Confetti & Petals
+      triggerCardConfetti();
+      for (let i = 0; i < 40; i++) {
         petals.push(new Petal());
       }
 
@@ -1340,17 +1278,24 @@
 
 
     /* =========================================================
-       5. INTERACTIVE EVENT HANDLERS & FULL FUNCTIONALITY
+       5. INTERACTIVE EVENT HANDLERS & CELEBRATIONS
        ======================================================== */
     function scrollToSection(id) {
       document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
     }
 
     function triggerHaldiFlowerBlast() {
-      initAudioContext();
-      playTone(880, 'sine', 0.3, 0.2);
       showToast("🌼 Marigold Flower Shower for Diksha & Mohit!");
-      for (let i = 0; i < 45; i++) {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 70,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#F59E0B', '#FBBF24', '#FCD34D', '#D97706', '#FEF3C7'],
+          shapes: ['circle']
+        });
+      }
+      for (let i = 0; i < 35; i++) {
         const p = new Petal('#FBBF24');
         p.speedY = Math.random() * 3 + 1.5;
         petals.push(p);
@@ -1360,7 +1305,7 @@
     let isHennaTracerOn = false;
     function activateHennaTracer() {
       if (isHennaTracerOn) {
-        showToast("🌿 Henna Tracer is already active! Move your mouse or finger to draw!");
+        showToast("🌿 Henna Tracer is already active! Move cursor/finger to draw!");
         return;
       }
       isHennaTracerOn = true;
@@ -1393,18 +1338,30 @@
     }
 
     function triggerFloralSwing() {
-      initAudioContext();
-      playTone(659, 'sine', 0.4, 0.15);
       showToast("🌸 Swinging on the garden jhula with Diksha & Mohit!");
-      for (let i = 0; i < 20; i++) {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 50,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#34D399', '#A7F3D0', '#F472B6', '#FBCFE8']
+        });
+      }
+      for (let i = 0; i < 25; i++) {
         petals.push(new Petal('#34D399'));
       }
     }
 
     function triggerRingCeremony() {
-      initAudioContext();
-      playTone(1046.5, 'sine', 0.7, 0.25);
       showToast("💍 Ring Exchange Celebrated! Congratulations to Diksha & Mohit!");
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 90,
+          spread: 90,
+          origin: { y: 0.6 },
+          colors: ['#D4AF37', '#FBBF24', '#FFFFFF', '#C59B27', '#E8A598']
+        });
+      }
       for (let i = 0; i < 35; i++) {
         petals.push(new Petal('#F4E8C1'));
       }
@@ -1413,18 +1370,31 @@
     let bVotes = 192;
     let gVotes = 188;
     function cheerSquad(team) {
-      initAudioContext();
       if (team === 'bride') {
         bVotes++;
         document.getElementById('brideVotes').innerText = bVotes;
-        playTone(784, 'sine', 0.2, 0.2);
         showToast("💖 Cheer counted for Bride's Squad!");
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 50,
+            spread: 60,
+            origin: { y: 0.65 },
+            colors: ['#F472B6', '#EC4899', '#FDA4AF']
+          });
+        }
         for (let i = 0; i < 15; i++) petals.push(new Petal('#F472B6'));
       } else {
         gVotes++;
         document.getElementById('groomVotes').innerText = gVotes;
-        playTone(659, 'sine', 0.2, 0.2);
         showToast("⚡ Cheer counted for Groom's Squad!");
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 50,
+            spread: 60,
+            origin: { y: 0.65 },
+            colors: ['#60A5FA', '#3B82F6', '#93C5FD']
+          });
+        }
         for (let i = 0; i < 15; i++) petals.push(new Petal('#60A5FA'));
       }
     }
@@ -1440,7 +1410,6 @@
     ];
 
     function takePhereStep(step) {
-      initAudioContext();
       const vow = phereList[step - 1];
       document.getElementById('phereStepTitle').innerText = vow.title;
       document.getElementById('phereVowText').innerText = `"${vow.text}"`;
@@ -1453,13 +1422,19 @@
           btn.className = "phere-tab w-7 h-7 rounded-full bg-white text-royalMaroon border border-rose-300 text-xs font-bold cursor-pointer";
         }
       });
-      playTone(440 + step * 40, 'sine', 0.3, 0.15);
     }
 
     function showerRosePetals() {
-      initAudioContext();
-      playTone(523.25, 'sine', 0.5, 0.2);
       showToast("🌹 Fragrant Rose Petals Showered on the Mandap!");
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 80,
+          spread: 85,
+          origin: { y: 0.6 },
+          colors: ['#9E2A2B', '#E11D48', '#FDA4AF', '#F43F5E', '#FFF1F2'],
+          shapes: ['circle']
+        });
+      }
       for (let i = 0; i < 45; i++) {
         const p = new Petal('#9E2A2B');
         p.speedY = Math.random() * 3 + 1;
@@ -1469,15 +1444,99 @@
 
 
     /* =========================================================
-       6. CUSTOMIZABLE WISH CARDS (12 THEMES, LIVE PREVIEW & DOWNLOAD)
+       6. CUSTOMIZABLE WISH CARDS (12 THEMES & LIVE ANIMATIONS)
        ======================================================== */
     let currentCardTheme = 'gold';
+
+    const themeDecorMap = {
+      gold: { icon: '✨', colors: ['#C59B27', '#F4E8C1', '#D4AF37', '#FEF3C7'] },
+      maroon: { icon: '👑', colors: ['#721C24', '#9E2A2B', '#D4AF37', '#FFF8EB'] },
+      blush: { icon: '🌸', colors: ['#E8A598', '#FDF0ED', '#FDA4AF', '#F43F5E'] },
+      emerald: { icon: '🌿', colors: ['#16A34A', '#2D6A4F', '#DCFCE7', '#D4AF37'] },
+      marigold: { icon: '🌻', colors: ['#F59E0B', '#D97706', '#FEF3C7', '#FBBF24'] },
+      midnight: { icon: '⭐', colors: ['#38BDF8', '#818CF8', '#93C5FD', '#FFFFFF'] },
+      parchment: { icon: '📜', colors: ['#9C6644', '#DDB892', '#B08968', '#F5EBE0'] },
+      peacock: { icon: '🦚', colors: ['#0891B2', '#06B6D4', '#67E8F9', '#D4AF37'] },
+      saffron: { icon: '🧡', colors: ['#EA580C', '#F97316', '#FFEDD5', '#FBBF24'] },
+      pearl: { icon: '🤍', colors: ['#E2E8F0', '#CBD5E1', '#F8FAFC', '#D4AF37'] },
+      violet: { icon: '💜', colors: ['#9333EA', '#A855F7', '#C084FC', '#F472B6'] },
+      lantern: { icon: '🏮', colors: ['#F59E0B', '#FBBF24', '#EF4444', '#FEF3C7'] }
+    };
 
     function setCardTheme(themeName) {
       currentCardTheme = themeName;
       const card = document.getElementById('exportWishCard');
       card.className = `theme-${themeName} p-6 sm:p-8 rounded-3xl shadow-xl space-y-4 text-center relative overflow-hidden transition-all duration-300`;
-      showToast(`✨ Card Theme updated to: ${themeName.toUpperCase()}`);
+      
+      const info = themeDecorMap[themeName] || themeDecorMap.gold;
+      
+      // Update decorative corners
+      ['cardThemeDecorTopLeft', 'cardThemeDecorTopRight', 'cardThemeDecorBottomLeft', 'cardThemeDecorBottomRight'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = info.icon;
+      });
+
+      // Fire theme-specific live burst
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 55,
+          spread: 65,
+          origin: { y: 0.6 },
+          colors: info.colors
+        });
+      }
+
+      showToast(`✨ Switched Theme: ${themeName.toUpperCase()}`);
+    }
+
+    /* Live Card Magic Buttons */
+    function triggerCardFlowerShower() {
+      showToast("🌸 Fragrant Flower Shower across your card!");
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 65,
+          spread: 80,
+          origin: { y: 0.55 },
+          colors: ['#F43F5E', '#FB7185', '#FDA4AF', '#FDF2F8', '#FBBF24'],
+          shapes: ['circle']
+        });
+      }
+    }
+
+    function triggerCardConfetti() {
+      showToast("🎉 Celebration Party Poppers fired!");
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 90,
+          spread: 95,
+          origin: { y: 0.55 },
+          colors: ['#721C24', '#C59B27', '#9333EA', '#0891B2', '#EC4899', '#F59E0B']
+        });
+      }
+    }
+
+    function triggerCardSparkles() {
+      showToast("✨ Shimmering Golden Sparkles!");
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 60,
+          spread: 75,
+          origin: { y: 0.55 },
+          colors: ['#FFD700', '#FBBF24', '#FFFBEB', '#C59B27', '#FFFFFF']
+        });
+      }
+    }
+
+    function triggerCardHearts() {
+      showToast("💖 Shower of Love & Blessings!");
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 60,
+          spread: 70,
+          origin: { y: 0.55 },
+          colors: ['#E11D48', '#F43F5E', '#FB7185', '#FDA4AF', '#FFE4E6']
+        });
+      }
     }
 
     function updateWishCardLive() {
@@ -1501,9 +1560,9 @@
 
     // Default Seed Wishes
     const defaultWishes = [
-      { name: "Sharma Family", relation: "Family Blessings", msg: "May Diksha and Mohit's bond grow stronger with each passing day. Wishing you endless smiles and prosperity!", song: "Din Shagna Da", theme: "gold", time: "Just now" },
-      { name: "College Friends Squad", relation: "Friends &hearts;", msg: "Can't wait to rock the Sangeet dance battle and celebrate the most beautiful couple!", song: "London Thumakda", theme: "violet", time: "1 hour ago" },
-      { name: "Verma &amp; Gupta Family", relation: "Relatives", msg: "Blessings and love to dear Diksha & Mohit for a blissful married life ahead!", song: "Kudmayi", theme: "emerald", time: "2 hours ago" }
+      { name: "Sharma Family", relation: "Family Blessings", msg: "May Diksha and Mohit's bond grow stronger with each passing day. Wishing you endless smiles, prosperity, and love!", song: "Sajna", theme: "gold", time: "Just now" },
+      { name: "College Friends Squad", relation: "Friends &hearts;", msg: "Can't wait to rock the Sangeet dance battle and celebrate the most beautiful couple!", song: "Sajna", theme: "violet", time: "1 hour ago" },
+      { name: "Verma &amp; Gupta Family", relation: "Relatives", msg: "Blessings and love to dear Diksha & Mohit for a blissful married life ahead!", song: "Sajna", theme: "emerald", time: "2 hours ago" }
     ];
 
     function loadWishes() {
@@ -1515,7 +1574,7 @@
     function renderWishesList(list) {
       const container = document.getElementById('loggedWishesList');
       container.innerHTML = '';
-      list.forEach((w, index) => {
+      list.forEach((w) => {
         const card = document.createElement('div');
         card.className = `p-3 rounded-2xl border text-xs space-y-1 shadow-sm transition-all duration-300 ${
           w.theme === 'maroon' ? 'bg-[#721C24] text-white border-amber-400/40' :
@@ -1539,7 +1598,6 @@
     }
 
     function saveAndPostWishCard() {
-      initAudioContext();
       const name = document.getElementById('cardNameInput').value.trim() || 'Well-wisher';
       const relation = document.getElementById('cardRelationInput').value.trim() || 'Guest';
       const msg = document.getElementById('cardMessageInput').value.trim();
@@ -1574,7 +1632,8 @@
       document.body.appendChild(lantern);
       setTimeout(() => lantern.remove(), 13000);
 
-      playTone(880, 'sine', 0.4, 0.2);
+      // Confetti celebration
+      triggerCardConfetti();
       showToast("🎉 Your custom wish card was posted to the Blessings Wall!");
       scrollToSection('rsvpSection');
     }
@@ -1647,6 +1706,7 @@
       e.preventDefault();
       const name = document.getElementById('rsvpName').value;
       const count = document.getElementById('rsvpCount').value;
+      triggerCardFlowerShower();
       showToast(`🎉 Thank you, ${name}! Your RSVP for ${count} guest(s) is warmly received!`);
       document.getElementById('rsvpName').value = '';
       document.getElementById('rsvpSong').value = '';
