@@ -746,7 +746,7 @@
         </div>
         <h3 class="font-serif text-3xl sm:text-4xl text-royalMaroon font-semibold">How Well Do You Know The Couple?</h3>
         <p class="text-xs sm:text-sm text-subtleText max-w-md mx-auto">
-          Test your insider knowledge about Diksha &amp; Mohit with 5 fun questions and unlock your exclusive wedding VIP badge!
+          Test your insider knowledge about Diksha &amp; Mohit with 5 fun trivia questions + vote on their dream honeymoon destination!
         </p>
       </div>
 
@@ -948,14 +948,8 @@
 
           <!-- Action Buttons -->
           <div class="pt-2 flex flex-wrap gap-2">
-            <button onclick="saveAndPostWishCard()" class="px-5 py-2.5 bg-royalMaroon hover:bg-deepRose text-white font-cinzel text-xs font-semibold rounded-full shadow-md transition flex items-center gap-1.5 cursor-pointer">
-              <i class="fa-solid fa-cloud-arrow-up text-goldFoil"></i> Post to Blessings Wall
-            </button>
-            <button onclick="downloadCustomWishCardPDF()" class="px-4 py-2.5 bg-royalMaroon hover:bg-deepRose text-white font-cinzel text-xs font-semibold rounded-full shadow-md transition flex items-center gap-1.5 cursor-pointer border border-goldFoil/40">
-              <i class="fa-solid fa-file-pdf text-amber-300"></i> Download PDF Keepsake
-            </button>
-            <button onclick="downloadCustomWishCardImage()" class="px-4 py-2.5 bg-goldFoil hover:bg-amber-600 text-white font-cinzel text-xs font-semibold rounded-full shadow-md transition flex items-center gap-1.5 cursor-pointer">
-              <i class="fa-solid fa-image"></i> Download PNG Image
+            <button onclick="saveAndPostWishCard()" class="px-6 py-3 bg-royalMaroon hover:bg-deepRose text-white font-cinzel text-xs font-semibold rounded-full shadow-md transition flex items-center gap-2 cursor-pointer">
+              <i class="fa-solid fa-cloud-arrow-up text-goldFoil"></i> Post Blessing to Wall &amp; Registry
             </button>
           </div>
 
@@ -985,31 +979,29 @@
             </div>
 
             <!-- The Exportable Wish Card Node -->
-            <div id="exportWishCard" class="theme-gold p-6 sm:p-8 rounded-3xl shadow-xl space-y-4 text-center relative overflow-hidden transition-all duration-300">
+            <div id="exportWishCard" class="theme-gold relative rounded-2xl p-6 sm:p-7 border-2 shadow-lg space-y-4 overflow-hidden transition-all duration-500">
               
-              <!-- Dynamic Theme Corner Flourishes -->
-              <span id="cardThemeDecorTopLeft" class="absolute top-3 left-3 text-sm opacity-70 animate-pulse">✨</span>
-              <span id="cardThemeDecorTopRight" class="absolute top-3 right-3 text-sm opacity-70 animate-pulse">✨</span>
-              <span id="cardThemeDecorBottomLeft" class="absolute bottom-3 left-3 text-sm opacity-70 animate-pulse">✨</span>
-              <span id="cardThemeDecorBottomRight" class="absolute bottom-3 right-3 text-sm opacity-70 animate-pulse">✨</span>
+              <!-- Floating Magic Petals / Sparkles Container -->
+              <div id="cardMagicContainer" class="absolute inset-0 pointer-events-none overflow-hidden z-20"></div>
 
-              <!-- Subtle decorative crest -->
-              <div class="flex items-center justify-center gap-2 relative z-10">
-                <span class="text-xs opacity-75"><i class="fa-solid fa-om"></i></span>
-                <span class="font-cinzel text-xs uppercase tracking-[0.2em] font-bold">Diksha &amp; Mohit Vivah</span>
-                <span class="text-xs opacity-75"><i class="fa-solid fa-heart"></i></span>
+              <!-- Auspicious Header -->
+              <div class="flex items-center justify-between border-b border-current/20 pb-2 relative z-10">
+                <span class="font-hindi text-xs tracking-wider">॥ शुभ विवाह ॥</span>
+                <span class="font-cinzel text-[10px] font-bold uppercase tracking-widest opacity-80">Wedding Blessing</span>
+                <i class="fa-solid fa-heart text-xs opacity-70"></i>
               </div>
 
-              <!-- Message Body -->
-              <div class="py-2 relative z-10">
-                <p id="cardPreviewMsg" class="font-serif italic text-base sm:text-lg leading-relaxed">
+              <!-- Message -->
+              <div class="min-h-[80px] flex items-center relative z-10 py-1">
+                <p id="cardPreviewMsg" class="font-serif text-sm sm:text-base leading-relaxed italic">
                   "Wishing Diksha and Mohit a lifetime filled with unconditional love, boundless laughter, good health, and eternal prosperity!"
                 </p>
               </div>
 
-              <!-- Song Tag if any -->
-              <div id="cardPreviewSongWrap" class="inline-block px-3 py-1 rounded-full bg-white/40 backdrop-blur-sm text-[10px] font-semibold border border-current/20 relative z-10">
-                <i class="fa-solid fa-music mr-1"></i> <span id="cardPreviewSong">Dedicated Song: Sajna</span>
+              <!-- Dedicated Song (if present) -->
+              <div id="cardPreviewSongRow" class="text-[11px] font-medium opacity-90 flex items-center gap-1.5 pt-1 relative z-10">
+                <i class="fa-solid fa-music text-[10px] text-amber-400"></i>
+                <span>Dedicated Track: <strong id="cardPreviewSong" class="font-serif">Sajna</strong></span>
               </div>
 
               <!-- Sender Signature -->
@@ -1021,15 +1013,6 @@
 
             </div>
 
-            <div class="mt-2 flex items-center justify-center gap-4 text-xs font-semibold">
-              <button onclick="downloadCustomWishCardPDF()" class="text-royalMaroon hover:text-deepRose flex items-center gap-1 cursor-pointer">
-                <i class="fa-solid fa-file-pdf text-amber-600"></i> Download PDF
-              </button>
-              <span class="text-subtleText">&bull;</span>
-              <button onclick="downloadCustomWishCardImage()" class="text-royalMaroon hover:text-goldFoil flex items-center gap-1 cursor-pointer">
-                <i class="fa-solid fa-image text-goldFoil"></i> Download PNG
-              </button>
-            </div>
           </div>
         </div>
 
@@ -2175,54 +2158,64 @@
        ========================================================= */
     const quizData = [
       {
-        question: "Where did Diksha & Mohit's love story first begin?",
+        question: "How did Diksha & Mohit spend their romantic first date?",
         options: [
-          "A Cute Coffee Date & Endless Conversations",
-          "College Library & Study Group",
-          "A Mutual Friend's Sangeet Dance Party",
-          "A Himalayan Mountain Trek"
+          "A wonderful Dinner & a memorable Long Walk 🌙",
+          "A quick Coffee & Library study session ☕",
+          "Movie Premiere & Popcorn in theater 🍿",
+          "An adventurous amusement park roller coaster 🎢"
         ],
         correct: 0
       },
       {
-        question: "Who is the undisputed Bollywood dance enthusiast for the Sangeet Battle?",
+        question: "Between the two, who is the undisputed Dance Enthusiast of the wedding?",
         options: [
-          "Mohit with his high-energy Punjabi Bhangra",
-          "Diksha with her graceful Bollywood thumkas",
-          "Both of them — setting the stage on fire!",
-          "The DJ who refuses to stop the beats!"
+          "Mohit — 100% Dance Enthusiast ready to rock the stage! 🕺",
+          "Diksha — Prefers watching and smiling quietly 🙈",
+          "Only the Sangeet Choreographer 💃",
+          "The Pandit Ji conducting the Saat Phere 🪔"
         ],
-        correct: 2
+        correct: 0
       },
       {
-        question: "What is the couple's favorite late-night comfort food together?",
+        question: "In which city did Diksha & Mohit's parents first meet to seal the alliance?",
         options: [
-          "Gourmet Woodfire Pizza",
-          "Late-night Steaming Chai & Hot Momos",
-          "Butter Chicken & Garlic Naan",
-          "Midnight Belgian Waffles & Ice Cream"
+          "Bhopal 🏛️",
+          "Kanpur 🏙️",
+          "Indore 🥘",
+          "Bangalore 🌳"
         ],
-        correct: 1
+        correct: 0
       },
       {
-        question: "What is Diksha & Mohit's ultimate dream honeymoon getaway?",
+        question: "Which wonderful city will Diksha & Mohit be calling home together after marriage?",
         options: [
-          "Snowy Swiss Alps in Switzerland",
-          "Tropical Maldives Overwater Villa & Coral Reefs",
-          "Royal Heritage Palaces in Udaipur",
-          "Serene Backwaters of Kerala"
+          "Bangalore (Bengaluru) 🌆",
+          "Mumbai (Bombay) 🌊",
+          "Delhi NCR 🏛️",
+          "Hyderabad 🏰"
         ],
-        correct: 1
+        correct: 0
       },
       {
-        question: "On 27th Nov at the Sacred Saat Phere, who will smile the brightest?",
+        question: "When setting up their dream home together, what are their signature traits?",
         options: [
-          "Diksha",
-          "Mohit",
-          "Both — surrounded by endless love and family blessings!",
-          "All the happy wedding guests cheering!"
+          "Diksha loves spotless Cleanliness, while Mohit is all about Aesthetics & Vibe! ✨",
+          "Mohit is the cleaning master, Diksha is the interior stylist 🛋️",
+          "Both love messy, chaotic rooms 📦",
+          "Neither — they leave all chores to AI robots 🤖"
         ],
-        correct: 2
+        correct: 0
+      },
+      {
+        question: "✈️ GUEST POLL: Where should Diksha & Mohit travel for their dream Honeymoon?",
+        options: [
+          "Bali & Tropical Beaches 🌴",
+          "Switzerland & Snow-Capped Alps 🏔️",
+          "Japan & Cherry Blossom Gardens 🌸",
+          "New Zealand & Scenic Road Trips 🚗"
+        ],
+        isPoll: true
       }
     ];
 
@@ -2237,7 +2230,9 @@
       }
       quizAnswered = false;
       const q = quizData[index];
-      document.getElementById('quizQuestionNumber').innerText = `Question ${index + 1} of ${quizData.length}`;
+      
+      const totalScored = quizData.filter(item => !item.isPoll).length;
+      document.getElementById('quizQuestionNumber').innerText = q.isPoll ? `Bonus Poll (Final Step)` : `Question ${index + 1} of ${totalScored}`;
       document.getElementById('quizScoreNum').innerText = quizScore;
       document.getElementById('quizProgressBar').style.width = `${((index + 1) / quizData.length) * 100}%`;
       document.getElementById('quizQuestionPrompt').innerText = q.question;
@@ -2267,7 +2262,21 @@
       const q = quizData[currentQuizIndex];
       const allButtons = document.querySelectorAll('.quiz-opt-btn');
 
-      if (selectedIdx === q.correct) {
+      if (q.isPoll) {
+        // Honeymoon Poll: All recommendations are cherished winners!
+        btnElem.className = 'quiz-opt-btn w-full p-3.5 sm:p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-left text-xs sm:text-sm font-semibold text-emerald-950 shadow-md flex items-center justify-between';
+        btnElem.querySelector('.quiz-opt-icon').className = 'quiz-opt-icon fa-solid fa-heart text-rose-500 text-sm shrink-0';
+        showToast(`✈️ Awesome choice! Honeymoon recommendation noted!`);
+        
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 50,
+            spread: 70,
+            origin: { y: 0.65 },
+            colors: ['#EC4899', '#8B5CF6', '#F59E0B']
+          });
+        }
+      } else if (selectedIdx === q.correct) {
         quizScore++;
         document.getElementById('quizScoreNum').innerText = quizScore;
         btnElem.className = 'quiz-opt-btn w-full p-3.5 sm:p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-left text-xs sm:text-sm font-semibold text-emerald-950 shadow-md flex items-center justify-between';
@@ -2294,7 +2303,7 @@
       setTimeout(() => {
         currentQuizIndex++;
         renderQuizQuestion(currentQuizIndex);
-      }, 1000);
+      }, 1200);
     }
 
     function showQuizResults() {
@@ -2306,12 +2315,12 @@
       const msg = document.getElementById('quizResultMsg');
 
       if (quizScore === 5) {
-        title.innerText = "🏆 Bestie Level: 100% (Wedding VIP)";
+        title.innerText = "🏆 Perfect Score: 5/5 (Wedding VIP)";
         msg.innerText = "Incredible! You know Diksha & Mohit inside out! You are officially an inner circle VIP!";
         triggerCardConfetti();
       } else if (quizScore >= 3) {
-        title.innerText = "💖 Squad Insider (80% Knowledge)";
-        msg.innerText = "Great job! You know the couple very well and are ready to celebrate with all your heart!";
+        title.innerText = "💖 Squad Insider (Good Knowledge)";
+        msg.innerText = "Awesome job! You know the couple very well and are ready to celebrate with all your heart!";
         triggerCardSparkles();
       } else {
         title.innerText = "🌸 Beloved Wedding Guest";
@@ -2332,7 +2341,7 @@
     function shareQuizScoreWhatsApp() {
       const txt = encodeURIComponent(
         `🎉 I scored ${quizScore}/5 on Diksha & Mohit's Wedding Trivia Quiz! 👑\n\n` +
-        `Check how well you know the couple and send your blessings on their wedding site:\n` +
+        `Test how well you know the couple and send your blessings on their wedding website:\n` +
         `👉 https://dikshamohit.in/#quizSection`
       );
       window.open(`https://api.whatsapp.com/send?text=${txt}`, '_blank');
