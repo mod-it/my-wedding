@@ -1665,13 +1665,25 @@
     }
 
     function updateWishCardLive() {
-      const name = document.getElementById('cardNameInput').value.trim() || 'Well-wisher';
+      const name = document.getElementById('cardNameInput').value.trim() || 'Anvesha';
       const relation = document.getElementById('cardRelationInput').value.trim() || 'Wedding Guest';
       const msg = document.getElementById('cardMessageInput').value.trim() || 'Wishing Diksha & Mohit eternal joy!';
       const song = document.getElementById('cardSongInput').value.trim();
 
       document.getElementById('cardPreviewName').innerText = name;
-      d    // Default Seed Wishes
+      document.getElementById('cardPreviewRelation').innerText = relation;
+      document.getElementById('cardPreviewMsg').innerText = `"${msg}"`;
+
+      const songWrap = document.getElementById('cardPreviewSongWrap');
+      if (song) {
+        songWrap.style.display = 'inline-block';
+        document.getElementById('cardPreviewSong').innerText = `Dedicated Song: ${song}`;
+      } else {
+        songWrap.style.display = 'none';
+      }
+    }
+
+    // Default Seed Wishes
     const defaultWishes = [
       { name: "Anvesha", relation: "Bride's Squad &hearts;", msg: "May Diksha and Mohit's bond grow stronger with each passing day. Wishing you endless smiles, prosperity, and unconditional love!", song: "Sajna", theme: "gold", time: "Just now" },
       { name: "College Friends Squad", relation: "Friends &hearts;", msg: "Can't wait to rock the Sangeet dance battle and celebrate the most beautiful couple!", song: "Sajna", theme: "violet", time: "1 hour ago" },
