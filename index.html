@@ -3,8 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diksha &amp; Mohit — Wedding Invitation</title>
   
+  <title>Diksha &amp; Mohit — Royal Wedding Invitation | 26-27 Nov 2026</title>
+  
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="shortcut icon" href="assets/favicon.png">
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Diksha &amp; Mohit — Royal Wedding Invitation | 26-27 Nov 2026">
+  <meta name="description" content="You are cordially invited to celebrate the royal wedding of Diksha &amp; Mohit on 26th &amp; 27th November 2026 at Royal Greens. View wedding itinerary, RSVP, and share your blessings!">
+  
+  <!-- Open Graph / WhatsApp / Facebook Rich Card Previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dikshamohit.in/">
+  <meta property="og:title" content="Diksha &amp; Mohit — Royal Wedding Celebrations (26 &amp; 27 Nov 2026)">
+  <meta property="og:description" content="You are cordially invited to celebrate the wedding celebrations of Diksha &amp; Mohit on 26th &amp; 27th November 2026 at Royal Greens. Join us for Haldi, Mehandi, Sangeet &amp; the Grand Vivah!">
+  <meta property="og:image" content="https://dikshamohit.in/assets/wedding_thumbnail.jpg">
+  <meta property="og:image:secure_url" content="https://dikshamohit.in/assets/wedding_thumbnail.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Diksha &amp; Mohit Royal Wedding Invitation">
+  <meta property="og:site_name" content="Diksha &amp; Mohit Wedding">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://dikshamohit.in/">
+  <meta name="twitter:title" content="Diksha &amp; Mohit — Royal Wedding Celebrations (26 &amp; 27 Nov 2026)">
+  <meta name="twitter:description" content="You are cordially invited to celebrate the wedding of Diksha &amp; Mohit on 26th &amp; 27th November 2026 at Royal Greens.">
+  <meta name="twitter:image" content="https://dikshamohit.in/assets/wedding_thumbnail.jpg">
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -153,57 +183,6 @@
   <audio id="weddingAudio" src="assets/Sajna.mp3?v=full" loop preload="auto"></audio>
 
   <!-- ========================================================
-       ROYAL WAX-SEALED ENVELOPE OPENING OVERLAY
-       ======================================================== -->
-  <div id="envelopeOverlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[#FAF7F2]/95 backdrop-blur-md transition-opacity duration-1000 p-4">
-    <div class="max-w-md w-full text-center space-y-6">
-      
-      <!-- Top Auspicious Shloka -->
-      <div class="space-y-1">
-        <p class="font-hindi text-goldFoil text-base sm:text-lg">॥ श्री गणेशाय नमः ॥</p>
-        <p class="font-cinzel text-xs uppercase tracking-[0.25em] text-royalMaroon font-semibold">The Wedding Invitation</p>
-      </div>
-
-      <!-- Envelope Card -->
-      <div class="bg-white rounded-3xl p-8 sm:p-10 border border-goldFoil/50 shadow-royal relative overflow-hidden">
-        
-        <!-- Corner Floral Flourishes -->
-        <div class="absolute top-3 left-3 text-goldFoil/40 text-xl"><i class="fa-solid fa-spa"></i></div>
-        <div class="absolute top-3 right-3 text-goldFoil/40 text-xl"><i class="fa-solid fa-spa"></i></div>
-        <div class="absolute bottom-3 left-3 text-goldFoil/40 text-xl"><i class="fa-solid fa-spa"></i></div>
-        <div class="absolute bottom-3 right-3 text-goldFoil/40 text-xl"><i class="fa-solid fa-spa"></i></div>
-
-        <!-- Royal Monogram Seal -->
-        <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-[#721C24] via-[#9E2A2B] to-[#58181F] text-amber-100 flex flex-col items-center justify-center shadow-lg border-2 border-goldFoil/80 relative mb-4">
-          <i class="fa-solid fa-crown text-goldFoil text-xs mb-0.5"></i>
-          <span class="font-cinzel text-2xl font-bold tracking-widest text-white">D &amp; M</span>
-        </div>
-
-        <h2 class="font-serif text-3xl sm:text-4xl text-royalMaroon font-semibold mb-1">
-          Diksha <span class="text-goldFoil font-script text-3xl">&amp;</span> Mohit
-        </h2>
-        <p class="font-script text-2xl text-goldFoil">Together With Their Families</p>
-        
-        <p class="text-xs text-subtleText mt-3 font-normal leading-relaxed">
-          Cordially invite you to celebrate the joyous occasions of our wedding celebrations on 26th &amp; 27th November 2026.
-        </p>
-
-        <!-- Open Invitation Button -->
-        <div class="mt-6">
-          <button onclick="openWeddingInvitation()" class="px-8 py-3.5 bg-gradient-to-r from-[#9E2A2B] via-[#721C24] to-[#9E2A2B] text-white font-cinzel text-xs uppercase tracking-[0.2em] font-semibold rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 border border-goldFoil flex items-center justify-center gap-2 mx-auto cursor-pointer">
-            <i class="fa-regular fa-envelope-open text-sm text-goldFoil"></i>
-            <span>OPEN INVITATION</span>
-          </button>
-        </div>
-
-      </div>
-
-      <p class="text-[11px] text-subtleText tracking-widest uppercase font-medium">Click to enter wedding celebrations</p>
-    </div>
-  </div>
-
-
-  <!-- ========================================================
        AMBIENT CANVAS FOR FLOATING PETALS & SPARKS
        ======================================================== -->
   <canvas id="petalCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
@@ -309,9 +288,9 @@
           <i class="fa-regular fa-calendar-check text-goldFoil"></i>
           <span>26th &bull; 27th November 2026</span>
         </div>
-        <a href="https://share.google/IMDatwbFiktH3LCME" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-2xl bg-white border border-goldFoil/30 shadow-sm text-xs text-royalMaroon font-medium flex items-center gap-2 hover:border-goldFoil transition">
+        <a href="https://share.google/MYqnfmSerxQmfgEvj" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-2xl bg-white border border-goldFoil/30 shadow-sm text-xs text-royalMaroon font-medium flex items-center gap-2 hover:border-goldFoil transition">
           <i class="fa-solid fa-location-dot text-deepRose"></i>
-          <span>Grand Wedding Venue</span>
+          <span>Royal Greens Venue</span>
         </a>
       </div>
 
@@ -342,14 +321,11 @@
           </div>
 
           <div class="mt-5 flex flex-wrap justify-center gap-3">
-            <button onclick="openInvitationPrintModal()" class="px-4 py-2 rounded-full bg-royalMaroon text-white text-xs font-semibold hover:bg-deepRose transition flex items-center gap-1.5 shadow-sm">
+            <button onclick="openInvitationPrintModal()" class="px-5 py-2.5 rounded-full bg-royalMaroon text-white text-xs font-semibold hover:bg-deepRose transition flex items-center gap-1.5 shadow-sm cursor-pointer">
               <i class="fa-solid fa-download text-goldFoil"></i> Download 2-Page Invite
             </button>
-            <button onclick="downloadWeddingICS()" class="px-4 py-2 rounded-full bg-ivory text-royalMaroon border border-goldFoil/40 text-xs font-semibold hover:bg-lightGold transition flex items-center gap-1.5">
-              <i class="fa-regular fa-calendar-plus text-goldFoil"></i> Save Dates (.ics)
-            </button>
-            <button onclick="shareOnWhatsApp()" class="px-4 py-2 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-300 text-xs font-semibold hover:bg-emerald-100 transition flex items-center gap-1.5">
-              <i class="fa-brands fa-whatsapp text-emerald-600"></i> WhatsApp
+            <button onclick="shareOnWhatsApp()" class="px-5 py-2.5 rounded-full bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition flex items-center gap-1.5 shadow-sm cursor-pointer">
+              <i class="fa-brands fa-whatsapp text-sm"></i> Share on WhatsApp
             </button>
           </div>
         </div>
@@ -987,19 +963,16 @@
 
       <div class="space-y-1">
         <span class="font-cinzel text-xs uppercase tracking-[0.25em] text-goldFoil font-semibold">Wedding Destination</span>
-        <h3 class="font-serif text-3xl sm:text-4xl text-royalMaroon">Celebration Venue</h3>
+        <h3 class="font-serif text-3xl sm:text-4xl text-royalMaroon">Royal Greens</h3>
         <p class="text-xs sm:text-sm text-subtleText max-w-md mx-auto">
-          Both days of celebrations (26th &amp; 27th November 2026) will be held at this wonderful destination.
+          Both days of wedding celebrations (26th &amp; 27th November 2026) will be held at Royal Greens.
         </p>
       </div>
 
       <div class="pt-2 flex flex-wrap justify-center gap-3">
-        <a href="https://share.google/IMDatwbFiktH3LCME" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-royalMaroon hover:bg-deepRose text-white font-cinzel text-xs font-semibold rounded-full shadow-md transition flex items-center gap-2 tracking-wider cursor-pointer">
-          <i class="fa-solid fa-diamond-turn-right text-sm text-goldFoil"></i> Open Google Maps Directions
+        <a href="https://share.google/MYqnfmSerxQmfgEvj" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 bg-royalMaroon hover:bg-deepRose text-white font-cinzel text-xs font-semibold rounded-full shadow-md transition flex items-center gap-2 tracking-wider cursor-pointer">
+          <i class="fa-solid fa-diamond-turn-right text-sm text-goldFoil"></i> Open Royal Greens on Google Maps
         </a>
-        <button onclick="downloadWeddingICS()" class="px-5 py-3 bg-ivory text-royalMaroon hover:bg-lightGold font-sans text-xs font-semibold rounded-full border border-goldFoil/40 transition flex items-center gap-2 cursor-pointer">
-          <i class="fa-solid fa-calendar-check text-goldFoil"></i> Save to Calendar
-        </button>
       </div>
 
     </div>
@@ -1193,8 +1166,8 @@
 
           <!-- Venue Details -->
           <div class="p-4 bg-ivory rounded-xl border border-goldFoil/40 text-center space-y-1">
-            <h5 class="font-serif text-base text-royalMaroon font-bold">Wedding Destination Venue</h5>
-            <p class="text-[11px] text-subtleText">Destination location for both days &bull; https://share.google/IMDatwbFiktH3LCME</p>
+            <h5 class="font-serif text-base text-royalMaroon font-bold">Royal Greens</h5>
+            <p class="text-[11px] text-subtleText">Celebration venue for both days &bull; https://share.google/MYqnfmSerxQmfgEvj</p>
           </div>
 
           <div class="text-[9px] text-subtleText uppercase tracking-widest pt-2">Page 2 &bull; Itinerary &amp; Venue Details</div>
@@ -1944,55 +1917,20 @@
       document.getElementById('rsvpSong').value = '';
     }
 
-    function downloadWeddingICS() {
-      const ics = [
-        "BEGIN:VCALENDAR",
-        "VERSION:2.0",
-        "PRODID:-//Diksha and Mohit Wedding//EN",
-        "CALSCALE:GREGORIAN",
-        "METHOD:PUBLISH",
-        "BEGIN:VEVENT",
-        "UID:haldi-sangeet-20261126@dikshamohit",
-        "DTSTART:20261126T053000Z",
-        "DTEND:20261126T183000Z",
-        "SUMMARY:Diksha & Mohit Wedding — Day 1 (Haldi, Mehandi & Sangeet)",
-        "DESCRIPTION:Haldi (11 AM), Mehandi (4 PM), Engagement & Sangeet (8 PM). Venue: https://share.google/IMDatwbFiktH3LCME",
-        "LOCATION:https://share.google/IMDatwbFiktH3LCME",
-        "STATUS:CONFIRMED",
-        "END:VEVENT",
-        "BEGIN:VEVENT",
-        "UID:royal-vivah-20261127@dikshamohit",
-        "DTSTART:20261127T133000Z",
-        "DTEND:20261127T233000Z",
-        "SUMMARY:Diksha & Mohit Wedding — Day 2 (The Grand Vivah Night)",
-        "DESCRIPTION:Warmala & Sacred Saat Phere (7 PM onwards). Venue: https://share.google/IMDatwbFiktH3LCME",
-        "LOCATION:https://share.google/IMDatwbFiktH3LCME",
-        "STATUS:CONFIRMED",
-        "END:VEVENT",
-        "END:VCALENDAR"
-      ].join("\r\n");
-
-      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-      const a = document.createElement('a');
-      a.href = window.URL.createObjectURL(blob);
-      a.setAttribute('download', 'Diksha_Mohit_Wedding_Invitation.ics');
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      showToast("📅 Wedding Events saved to your calendar!");
-    }
-
     function shareOnWhatsApp() {
       const txt = encodeURIComponent(
-        "🌸 *You are cordially invited to Diksha & Mohit's Wedding Celebrations!*\n\n" +
+        "👑 *You are cordially invited to the Royal Wedding of Diksha & Mohit!*\n\n" +
+        "✨ *Celebration Itinerary:*\n" +
         "📅 *26th November 2026:*\n" +
-        "• 11:00 AM — Haldi Ceremony 💛\n" +
-        "• 04:00 PM — Mehandi Celebration 🌿\n" +
+        "• 11:00 AM — Phoolon Ki Haldi 💛\n" +
+        "• 04:00 PM — Mehandi & High Tea 🌿\n" +
         "• 08:00 PM — Engagement & Sangeet Dance Battle 💃🕺\n\n" +
         "📅 *27th November 2026:*\n" +
-        "• 07:00 PM Onwards — The Grand Vivah & Sacred Phere 🌹\n\n" +
-        "📍 Venue Location: https://share.google/IMDatwbFiktH3LCME\n\n" +
-        "Please join us in blessing the couple!"
+        "• 07:00 PM Onwards — The Grand Vivah & Sacred Saat Phere 🌹\n\n" +
+        "📍 *Venue:* Royal Greens\n" +
+        "🗺️ *Directions:* https://share.google/MYqnfmSerxQmfgEvj\n\n" +
+        "💌 *View Royal Invitation, RSVP & Wish Wall:* https://dikshamohit.in\n\n" +
+        "Please join us and grace the celebrations with your warm presence and blessings! 🙏✨"
       );
       window.open(`https://api.whatsapp.com/send?text=${txt}`, '_blank');
     }

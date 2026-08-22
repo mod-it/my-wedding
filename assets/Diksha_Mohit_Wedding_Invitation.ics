@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Diksha and Mohit Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:haldi-sangeet-20261126@dikshamohit
+DTSTART:20261126T053000Z
+DTEND:20261126T183000Z
+SUMMARY:Diksha & Mohit Wedding — Day 1 (Haldi, Mehandi & Sangeet)
+DESCRIPTION:Haldi (11 AM), Mehandi (4 PM), Engagement & Sangeet (8 PM). Venue: https://share.google/IMDatwbFiktH3LCME
+LOCATION:https://share.google/IMDatwbFiktH3LCME
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:royal-vivah-20261127@dikshamohit
+DTSTART:20261127T133000Z
+DTEND:20261127T233000Z
+SUMMARY:Diksha & Mohit Wedding — Day 2 (The Grand Vivah Night)
+DESCRIPTION:Warmala & Sacred Saat Phere (7 PM onwards). Venue: https://share.google/IMDatwbFiktH3LCME
+LOCATION:https://share.google/IMDatwbFiktH3LCME
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
