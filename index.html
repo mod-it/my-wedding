@@ -164,19 +164,19 @@
     .eq-bar-2 { animation: eqBarBounce 0.5s ease-in-out infinite 0.15s; }
     .eq-bar-3 { animation: eqBarBounce 0.8s ease-in-out infinite 0.3s; }
 
-    /* Custom Wish Card Theme Styles */
-    .theme-gold { background: linear-gradient(135deg, #FFFDF8, #FBF6E9); border: 2px solid #C59B27; color: #721C24; }
-    .theme-maroon { background: linear-gradient(135deg, #58181F, #721C24); border: 2px solid #D4AF37; color: #FFF8EB; }
-    .theme-blush { background: linear-gradient(135deg, #FFF5F5, #FDE2E4); border: 2px solid #E8A598; color: #6D2E46; }
-    .theme-emerald { background: linear-gradient(135deg, #F0FDF4, #DCFCE7); border: 2px solid #16A34A; color: #14532D; }
-    .theme-marigold { background: linear-gradient(135deg, #FFFBEB, #FEF3C7); border: 2px solid #F59E0B; color: #78350F; }
-    .theme-midnight { background: linear-gradient(135deg, #0F172A, #1E1B4B); border: 2px solid #93C5FD; color: #EFF6FF; }
-    .theme-parchment { background: #F5EBE0; border: 2px dashed #9C6644; color: #4A2810; }
-    .theme-peacock { background: linear-gradient(135deg, #ECFEFF, #CFFAFE); border: 2px solid #0891B2; color: #164E63; }
-    .theme-saffron { background: linear-gradient(135deg, #FFF7ED, #FFEDD5); border: 2px solid #EA580C; color: #7C2D12; }
-    .theme-pearl { background: #FFFFFF; border: 2px solid #E2E8F0; color: #1E293B; }
-    .theme-violet { background: linear-gradient(135deg, #FAF5FF, #F3E8FF); border: 2px solid #9333EA; color: #581C87; }
-    .theme-lantern { background: linear-gradient(135deg, #1C1917, #292524); border: 2px solid #FBBF24; color: #FEF3C7; }
+    /* Custom Wish Card Theme Styles with Decorative Textures & Depth */
+    .theme-gold { background: radial-gradient(circle at 50% 30%, #FFFDF8, #FBF4DE); border: 2.5px solid #C59B27; color: #721C24; box-shadow: 0 15px 35px rgba(197, 155, 39, 0.25); }
+    .theme-maroon { background: radial-gradient(circle at 50% 30%, #721C24, #480D12); border: 2.5px solid #D4AF37; color: #FFF8EB; box-shadow: 0 15px 35px rgba(114, 28, 36, 0.35); }
+    .theme-blush { background: radial-gradient(circle at 50% 30%, #FFF5F5, #FDE2E4); border: 2.5px solid #E8A598; color: #6D2E46; box-shadow: 0 15px 35px rgba(232, 165, 152, 0.25); }
+    .theme-emerald { background: radial-gradient(circle at 50% 30%, #F0FDF4, #DCFCE7); border: 2.5px solid #16A34A; color: #14532D; box-shadow: 0 15px 35px rgba(22, 163, 74, 0.22); }
+    .theme-marigold { background: radial-gradient(circle at 50% 30%, #FFFBEB, #FEF3C7); border: 2.5px solid #F59E0B; color: #78350F; box-shadow: 0 15px 35px rgba(245, 158, 11, 0.25); }
+    .theme-midnight { background: radial-gradient(circle at 50% 30%, #1E1B4B, #0F172A); border: 2.5px solid #93C5FD; color: #EFF6FF; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.4); }
+    .theme-parchment { background: #F5EBE0; border: 2.5px dashed #9C6644; color: #4A2810; box-shadow: 0 15px 35px rgba(156, 102, 68, 0.2); }
+    .theme-peacock { background: radial-gradient(circle at 50% 30%, #ECFEFF, #CFFAFE); border: 2.5px solid #0891B2; color: #164E63; box-shadow: 0 15px 35px rgba(8, 145, 178, 0.25); }
+    .theme-saffron { background: radial-gradient(circle at 50% 30%, #FFF7ED, #FFEDD5); border: 2.5px solid #EA580C; color: #7C2D12; box-shadow: 0 15px 35px rgba(234, 88, 12, 0.25); }
+    .theme-pearl { background: radial-gradient(circle at 50% 30%, #FFFFFF, #F1F5F9); border: 2.5px solid #CBD5E1; color: #1E293B; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); }
+    .theme-violet { background: radial-gradient(circle at 50% 30%, #FAF5FF, #F3E8FF); border: 2.5px solid #9333EA; color: #581C87; box-shadow: 0 15px 35px rgba(147, 51, 234, 0.25); }
+    .theme-lantern { background: radial-gradient(circle at 50% 30%, #292524, #1C1917); border: 2.5px solid #FBBF24; color: #FEF3C7; box-shadow: 0 15px 35px rgba(251, 191, 36, 0.3); }
   </style>
 </head>
 
@@ -978,30 +978,42 @@
               </div>
             </div>
 
-            <!-- The Exportable Wish Card Node -->
-            <div id="exportWishCard" class="theme-gold relative rounded-2xl p-6 sm:p-7 border-2 shadow-lg space-y-4 overflow-hidden transition-all duration-500">
+            <!-- The Rich Exportable Wish Card Node -->
+            <div id="exportWishCard" class="theme-gold relative rounded-3xl p-6 sm:p-8 border-2 shadow-2xl space-y-4 text-center overflow-hidden transition-all duration-500">
               
               <!-- Floating Magic Petals / Sparkles Container -->
               <div id="cardMagicContainer" class="absolute inset-0 pointer-events-none overflow-hidden z-20"></div>
 
-              <!-- Auspicious Header -->
-              <div class="flex items-center justify-between border-b border-current/20 pb-2 relative z-10">
-                <span class="font-hindi text-xs tracking-wider">॥ शुभ विवाह ॥</span>
-                <span class="font-cinzel text-[10px] font-bold uppercase tracking-widest opacity-80">Wedding Blessing</span>
-                <i class="fa-solid fa-heart text-xs opacity-70"></i>
+              <!-- Inner Decorative Border / Jali Frame -->
+              <div class="absolute inset-2 sm:inset-2.5 border border-dashed border-current/25 rounded-2xl pointer-events-none z-10"></div>
+
+              <!-- Dynamic Theme Corner Flourishes -->
+              <span id="cardThemeDecorTopLeft" class="absolute top-3 left-3.5 text-base opacity-80 animate-pulse z-20">✨</span>
+              <span id="cardThemeDecorTopRight" class="absolute top-3 right-3.5 text-base opacity-80 animate-pulse z-20">✨</span>
+              <span id="cardThemeDecorBottomLeft" class="absolute bottom-3 left-3.5 text-base opacity-80 animate-pulse z-20">✨</span>
+              <span id="cardThemeDecorBottomRight" class="absolute bottom-3 right-3.5 text-base opacity-80 animate-pulse z-20">✨</span>
+
+              <!-- Auspicious Header Crest -->
+              <div class="flex items-center justify-between border-b border-current/20 pb-2 relative z-10 px-2">
+                <span class="text-xs opacity-90"><i class="fa-solid fa-om text-goldFoil"></i></span>
+                <div class="text-center">
+                  <span class="font-hindi text-[11px] block text-amber-500 font-semibold">॥ शुभ विवाह ॥</span>
+                  <span class="font-cinzel text-[10px] font-bold uppercase tracking-[0.2em] opacity-90">Diksha &amp; Mohit Vivah</span>
+                </div>
+                <span class="text-xs opacity-90"><i class="fa-solid fa-heart text-deepRose"></i></span>
               </div>
 
-              <!-- Message -->
-              <div class="min-h-[80px] flex items-center relative z-10 py-1">
+              <!-- Message Body with Stylized Quotes -->
+              <div class="min-h-[85px] flex items-center justify-center relative z-10 py-1.5 px-2">
                 <p id="cardPreviewMsg" class="font-serif text-sm sm:text-base leading-relaxed italic">
                   "Wishing Diksha and Mohit a lifetime filled with unconditional love, boundless laughter, good health, and eternal prosperity!"
                 </p>
               </div>
 
               <!-- Dedicated Song (if present) -->
-              <div id="cardPreviewSongRow" class="text-[11px] font-medium opacity-90 flex items-center gap-1.5 pt-1 relative z-10">
-                <i class="fa-solid fa-music text-[10px] text-amber-400"></i>
-                <span>Dedicated Track: <strong id="cardPreviewSong" class="font-serif">Sajna</strong></span>
+              <div id="cardPreviewSongRow" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/40 backdrop-blur-sm text-[10px] font-semibold border border-current/20 relative z-10">
+                <i class="fa-solid fa-music text-amber-400"></i>
+                <span>Dedicated Song: <strong id="cardPreviewSong" class="font-serif">Sajna</strong></span>
               </div>
 
               <!-- Sender Signature -->
@@ -1696,7 +1708,9 @@
     function setCardTheme(themeName) {
       currentCardTheme = themeName;
       const card = document.getElementById('exportWishCard');
-      card.className = `theme-${themeName} p-6 sm:p-8 rounded-3xl shadow-xl space-y-4 text-center relative overflow-hidden transition-all duration-300`;
+      if (card) {
+        card.className = `theme-${themeName} relative rounded-3xl p-6 sm:p-8 border-2 shadow-2xl space-y-4 text-center overflow-hidden transition-all duration-500`;
+      }
       
       const info = themeDecorMap[themeName] || themeDecorMap.gold;
       
@@ -1709,8 +1723,8 @@
       // Fire theme-specific live burst
       if (typeof confetti === 'function') {
         confetti({
-          particleCount: 55,
-          spread: 65,
+          particleCount: 65,
+          spread: 75,
           origin: { y: 0.6 },
           colors: info.colors
         });
@@ -1775,16 +1789,23 @@
       const msg = document.getElementById('cardMessageInput').value.trim() || 'Wishing Diksha & Mohit eternal joy!';
       const song = document.getElementById('cardSongInput').value.trim();
 
-      document.getElementById('cardPreviewName').innerText = name;
-      document.getElementById('cardPreviewRelation').innerText = relation;
-      document.getElementById('cardPreviewMsg').innerText = `"${msg}"`;
+      const nameElem = document.getElementById('cardPreviewName');
+      const relElem = document.getElementById('cardPreviewRelation');
+      const msgElem = document.getElementById('cardPreviewMsg');
+      const songElem = document.getElementById('cardPreviewSong');
+      const songRow = document.getElementById('cardPreviewSongRow');
 
-      const songWrap = document.getElementById('cardPreviewSongWrap');
-      if (song) {
-        songWrap.style.display = 'inline-block';
-        document.getElementById('cardPreviewSong').innerText = `Dedicated Song: ${song}`;
-      } else {
-        songWrap.style.display = 'none';
+      if (nameElem) nameElem.innerText = name;
+      if (relElem) relElem.innerHTML = relation;
+      if (msgElem) msgElem.innerText = `"${msg}"`;
+
+      if (songRow) {
+        if (song) {
+          songRow.style.display = 'inline-flex';
+          if (songElem) songElem.innerText = song;
+        } else {
+          songRow.style.display = 'none';
+        }
       }
     }
 
