@@ -1735,16 +1735,25 @@
       });
     }
 
+    // Google Apps Script Cloud Webhook URL
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxqUz41nEOpo2Wkpo4OLVNHer5HteSxf33IWc0z6UzNhd5GsU8X9AK6YDyz7Z7giGUWQg/exec";
+
     function saveAndPostWishCard() {
       const name = document.getElementById('cardNameInput').value.trim() || 'Anvesha';
       const relation = document.getElementById('cardRelationInput').value.trim() || 'Guest';
       const msg = document.getElementById('cardMessageInput').value.trim();
       const song = document.getElementById('cardSongInput').value.trim();
+      const cardElem = document.getElementById('exportWishCard');
 
       if (!msg) {
         showToast("Please write a short blessing message before posting!");
         return;
       }
+
+      const formattedTime = new Date().toLocaleString("en-IN", { 
+        day: 'numeric', month: 'short', year: 'numeric', 
+        hour: '2-digit', minute: '2-digit', hour12: true 
+      });
 
       const newWish = {
         name,
@@ -1753,10 +1762,10 @@
         song,
         theme: currentCardTheme,
         time: 'Just now',
-        timestamp: new Date().toISOString()
+        timestamp: formattedTime
       };
 
-      // Save locally
+      // 1. Save locally and update Blessings Wall UI immediately
       const stored = localStorage.getItem(CLOUD_STORAGE_KEY) || localStorage.getItem('diksha_mohit_wishes');
       const list = stored ? JSON.parse(stored) : [...defaultWishes];
       list.unshift(newWish);
@@ -1775,8 +1784,53 @@
 
       // Confetti celebration
       triggerCardConfetti();
-      showToast("🎉 Your blessing was posted to the Royal Blessings Wall!");
+      showToast("🎉 Your blessing & keepsake card were posted to the Blessings Wall!");
       scrollToSection('rsvpSection');
+
+      // 2. Render Card to Image and Sync to Google Drive & Google Sheet
+      html2canvas(cardElem, {
+        scale: 1.5,
+        useCORS: true,
+        backgroundColor: null
+      }).then(canvas => {
+        const imageBase64 = canvas.toDataURL('image/png');
+        
+        const payload = {
+          type: "WISH",
+          name: name,
+          relation: relation,
+          msg: msg,
+          song: song || "-",
+          theme: currentCardTheme,
+          timestamp: formattedTime,
+          imageBase64: imageBase64
+        };
+
+        fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        }).catch(err => console.log('Apps script sync error:', err));
+      }).catch(err => {
+        // Fallback without image if canvas rendering fails
+        const payload = {
+          type: "WISH",
+          name: name,
+          relation: relation,
+          msg: msg,
+          song: song || "-",
+          theme: currentCardTheme,
+          timestamp: formattedTime,
+          imageBase64: ""
+        };
+        fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        }).catch(e => console.log(e));
+      });
     }
 
     function downloadCustomWishCardImage() {
@@ -1841,7 +1895,7 @@
 
 
     /* =========================================================
-       8. RSVP SUBMISSION & LIVE STORAGE
+       8. RSVP SUBMISSION & LIVE GOOGLE SHEET SYNC
        ======================================================== */
     function handleRSVPSubmit(e) {
       e.preventDefault();
@@ -1850,18 +1904,38 @@
       const count = document.getElementById('rsvpCount').value;
       const song = document.getElementById('rsvpSong').value.trim();
 
-      const rsvpData = {
-        name,
-        event: eventChoice,
-        guestCount: count,
-        songRequest: song,
-        submittedAt: new Date().toLocaleString()
+      const eventMap = {
+        'all': 'All Events (26 & 27 Nov)',
+        'day1': 'Day 1 (Haldi, Mehandi, Sangeet)',
+        'day2': 'Day 2 (Grand Vivah Night)'
       };
 
-      // Save to RSVP registry
+      const formattedTime = new Date().toLocaleString("en-IN", { 
+        day: 'numeric', month: 'short', year: 'numeric', 
+        hour: '2-digit', minute: '2-digit', hour12: true 
+      });
+
+      const rsvpData = {
+        type: "RSVP",
+        name: name,
+        event: eventMap[eventChoice] || eventChoice,
+        guestCount: count,
+        song: song || "-",
+        timestamp: formattedTime
+      };
+
+      // 1. Save locally
       const storedRSVPs = JSON.parse(localStorage.getItem('diksha_mohit_rsvps_list') || '[]');
       storedRSVPs.unshift(rsvpData);
       localStorage.setItem('diksha_mohit_rsvps_list', JSON.stringify(storedRSVPs));
+
+      // 2. Sync directly to Google Sheet Web App
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(rsvpData)
+      }).catch(err => console.log('RSVP sync error:', err));
 
       triggerCardFlowerShower();
       showToast(`🎉 Thank you, ${name}! Your RSVP for ${count} guest(s) is confirmed & logged!`);
