@@ -1295,48 +1295,67 @@
        ========================================================= */
     const weddingAudio = document.getElementById('weddingAudio');
     let isPlayingAudio = false;
+    let wasPlayingBeforeHidden = false;
 
-    function toggleWeddingMusic() {
+    function updateMusicUI(isPlaying) {
       const icon = document.getElementById('musicIcon');
       const status = document.getElementById('musicStatus');
       const eq = document.getElementById('soundEqBars');
+      if (isPlaying) {
+        if (icon) icon.className = "fa-solid fa-music text-goldFoil animate-pulse";
+        if (status) status.innerText = "Sajna ON";
+        if (eq) eq.style.opacity = '1';
+      } else {
+        if (icon) icon.className = "fa-solid fa-volume-xmark text-subtleText";
+        if (status) status.innerText = "Muted";
+        if (eq) eq.style.opacity = '0.3';
+      }
+    }
 
+    function toggleWeddingMusic() {
       if (weddingAudio.paused) {
         weddingAudio.play().then(() => {
           isPlayingAudio = true;
-          if (icon) icon.className = "fa-solid fa-music text-goldFoil animate-pulse";
-          if (status) status.innerText = "Sajna ON";
-          if (eq) eq.style.opacity = '1';
+          updateMusicUI(true);
           showToast("🎵 Playing Wedding Song: Sajna");
         }).catch(err => {
           console.warn('Audio playback error:', err);
-          showToast("Click anywhere on screen to enable audio");
+          showToast("Tap screen to enable audio");
         });
       } else {
         weddingAudio.pause();
         isPlayingAudio = false;
-        if (icon) icon.className = "fa-solid fa-volume-xmark text-subtleText";
-        if (status) status.innerText = "Muted";
-        if (eq) eq.style.opacity = '0.3';
+        wasPlayingBeforeHidden = false;
+        updateMusicUI(false);
         showToast("🔇 Music Muted");
       }
     }
 
-    // Try playing on first user click anywhere on page if not already playing
-    document.addEventListener('click', function startAudioOnFirstTouch() {
-      if (weddingAudio.paused && !isPlayingAudio) {
-        weddingAudio.play().then(() => {
-          isPlayingAudio = true;
-          const icon = document.getElementById('musicIcon');
-          const status = document.getElementById('musicStatus');
-          const eq = document.getElementById('soundEqBars');
-          if (icon) icon.className = "fa-solid fa-music text-goldFoil animate-pulse";
-          if (status) status.innerText = "Sajna ON";
-          if (eq) eq.style.opacity = '1';
-        }).catch(() => {});
+    // Stop audio immediately when tab is switched, screen is locked, or app minimized
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden || document.visibilityState === 'hidden') {
+        if (!weddingAudio.paused) {
+          wasPlayingBeforeHidden = true;
+          weddingAudio.pause();
+          updateMusicUI(false);
+        }
+      } else {
+        if (wasPlayingBeforeHidden) {
+          weddingAudio.play().then(() => {
+            isPlayingAudio = true;
+            updateMusicUI(true);
+          }).catch(() => {});
+        }
       }
-      document.removeEventListener('click', startAudioOnFirstTouch);
-    }, { once: true });
+    });
+
+    // Pause audio when page is closed, unloaded, or navigated away
+    window.addEventListener('pagehide', function() {
+      weddingAudio.pause();
+    });
+    window.addEventListener('beforeunload', function() {
+      weddingAudio.pause();
+    });
 
 
     /* =========================================================
@@ -2122,6 +2141,8 @@
     function shareOnWhatsApp() {
       const txt = encodeURIComponent(
         "🌸 *You are cordially invited to the Wedding Celebrations of Diksha & Mohit!*\n\n" +
+        "💌 *Wedding Invitation, RSVP & Blessings Wall:*\n" +
+        "👉 https://dikshamohit.in\n\n" +
         "✨ *Celebration Itinerary:*\n" +
         "📅 *26th November 2026:*\n" +
         "• 11:00 AM — Phoolon Ki Haldi 💛\n" +
@@ -2131,7 +2152,6 @@
         "• 07:00 PM Onwards — The Grand Vivah & Sacred Saat Phere 🌹\n\n" +
         "📍 *Venue:* Royal Greens\n" +
         "🗺️ *Directions:* https://share.google/MYqnfmSerxQmfgEvj\n\n" +
-        "💌 *View Wedding Invitation, RSVP & Blessings Wall:* https://dikshamohit.in\n\n" +
         "Please join us and grace the celebrations with your warm presence and blessings! 🙏✨"
       );
       window.open(`https://api.whatsapp.com/send?text=${txt}`, '_blank');
