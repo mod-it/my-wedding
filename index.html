@@ -46,8 +46,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
 
-  <!-- html2canvas for instant Wish Card & Invitation JPEG downloads -->
+  <!-- html2canvas for instant Wish Card & Invitation High-Res Renders -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- jsPDF for High-Definition PDF Generation & Vector Quality Downloads -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <!-- Canvas Confetti for Rich Interactive Celebrations, Flowers & Poppers -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
@@ -948,8 +951,11 @@
             <button onclick="saveAndPostWishCard()" class="px-5 py-2.5 bg-royalMaroon hover:bg-deepRose text-white font-cinzel text-xs font-semibold rounded-full shadow-md transition flex items-center gap-1.5 cursor-pointer">
               <i class="fa-solid fa-cloud-arrow-up text-goldFoil"></i> Post to Blessings Wall
             </button>
+            <button onclick="downloadCustomWishCardPDF()" class="px-4 py-2.5 bg-royalMaroon hover:bg-deepRose text-white font-cinzel text-xs font-semibold rounded-full shadow-md transition flex items-center gap-1.5 cursor-pointer border border-goldFoil/40">
+              <i class="fa-solid fa-file-pdf text-amber-300"></i> Download PDF Keepsake
+            </button>
             <button onclick="downloadCustomWishCardImage()" class="px-4 py-2.5 bg-goldFoil hover:bg-amber-600 text-white font-cinzel text-xs font-semibold rounded-full shadow-md transition flex items-center gap-1.5 cursor-pointer">
-              <i class="fa-solid fa-download"></i> Download Card Image
+              <i class="fa-solid fa-image"></i> Download PNG Image
             </button>
           </div>
 
@@ -1015,9 +1021,13 @@
 
             </div>
 
-            <div class="mt-2 text-center">
-              <button onclick="downloadCustomWishCardImage()" class="text-xs text-royalMaroon hover:text-goldFoil font-semibold flex items-center justify-center gap-1.5 mx-auto cursor-pointer">
-                <i class="fa-solid fa-image text-goldFoil"></i> Download Wish Card as High-Res PNG
+            <div class="mt-2 flex items-center justify-center gap-4 text-xs font-semibold">
+              <button onclick="downloadCustomWishCardPDF()" class="text-royalMaroon hover:text-deepRose flex items-center gap-1 cursor-pointer">
+                <i class="fa-solid fa-file-pdf text-amber-600"></i> Download PDF
+              </button>
+              <span class="text-subtleText">&bull;</span>
+              <button onclick="downloadCustomWishCardImage()" class="text-royalMaroon hover:text-goldFoil flex items-center gap-1 cursor-pointer">
+                <i class="fa-solid fa-image text-goldFoil"></i> Download PNG
               </button>
             </div>
           </div>
@@ -1150,12 +1160,15 @@
         <h3 class="font-serif text-3xl text-royalMaroon">Two-Page Wedding Invitation</h3>
         <p class="text-xs text-subtleText">Ready to print as PDF or save as high-resolution image</p>
         
-        <div class="flex justify-center gap-3 pt-2">
-          <button onclick="printInvitationPDF()" class="px-5 py-2 bg-royalMaroon text-white rounded-full font-cinzel text-xs font-semibold hover:bg-deepRose transition flex items-center gap-2 shadow-sm">
-            <i class="fa-solid fa-print"></i> Print / Save PDF
+        <div class="flex flex-wrap justify-center gap-3 pt-2">
+          <button onclick="downloadInvitationPDFDoc()" class="px-5 py-2.5 bg-royalMaroon text-white rounded-full font-cinzel text-xs font-semibold hover:bg-deepRose transition flex items-center gap-2 shadow-sm cursor-pointer border border-goldFoil/40">
+            <i class="fa-solid fa-file-pdf text-amber-300"></i> Download 2-Page PDF
           </button>
-          <button onclick="downloadInvitationImages()" class="px-5 py-2 bg-goldFoil text-white rounded-full font-cinzel text-xs font-semibold hover:bg-amber-600 transition flex items-center gap-2 shadow-sm">
-            <i class="fa-solid fa-image"></i> Download Image Pages
+          <button onclick="printInvitationPDF()" class="px-4 py-2.5 bg-ivory text-royalMaroon rounded-full font-cinzel text-xs font-semibold border border-goldFoil/50 hover:bg-lightGold transition flex items-center gap-2 shadow-sm cursor-pointer">
+            <i class="fa-solid fa-print"></i> Print
+          </button>
+          <button onclick="downloadInvitationImages()" class="px-4 py-2.5 bg-goldFoil text-white rounded-full font-cinzel text-xs font-semibold hover:bg-amber-600 transition flex items-center gap-2 shadow-sm cursor-pointer">
+            <i class="fa-solid fa-image"></i> Download Images
           </button>
         </div>
       </div>
@@ -1339,20 +1352,25 @@
       if (btn) btn.style.display = 'none';
       if (seal) seal.style.opacity = '0';
 
+      // Always reset viewport to absolute top
+      window.scrollTo({ top: 0, behavior: 'instant' });
+
       // 1. 3D Door Swing Open Animation (Outwards)
       if (left) left.style.transform = 'perspective(1200px) rotateY(-118deg)';
       if (right) right.style.transform = 'perspective(1200px) rotateY(118deg)';
 
       // 2. Play Full-Length Sajna Song
-      weddingAudio.play().then(() => {
-        isPlayingAudio = true;
-        const icon = document.getElementById('musicIcon');
-        const status = document.getElementById('musicStatus');
-        const eq = document.getElementById('soundEqBars');
-        if (icon) icon.className = "fa-solid fa-music text-goldFoil animate-pulse";
-        if (status) status.innerText = "Sajna ON";
-        if (eq) eq.style.opacity = '1';
-      }).catch(err => console.log('Audio play error:', err));
+      if (weddingAudio.paused) {
+        weddingAudio.play().then(() => {
+          isPlayingAudio = true;
+          const icon = document.getElementById('musicIcon');
+          const status = document.getElementById('musicStatus');
+          const eq = document.getElementById('soundEqBars');
+          if (icon) icon.className = "fa-solid fa-music text-goldFoil animate-pulse";
+          if (status) status.innerText = "Sajna ON";
+          if (eq) eq.style.opacity = '1';
+        }).catch(err => console.log('Audio play error:', err));
+      }
 
       // 3. Celebratory Confetti & Petal Shower
       triggerCardConfetti();
@@ -1360,13 +1378,15 @@
         petals.push(new Petal());
       }
 
-      // 4. Smooth Overlay Fadeout into Landing Page
+      // 4. Smooth Overlay Fadeout into Landing Page Top
       setTimeout(() => {
         if (overlay) {
           overlay.style.opacity = '0';
           overlay.style.pointerEvents = 'none';
+          window.scrollTo({ top: 0, behavior: 'instant' });
           setTimeout(() => {
             overlay.style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'instant' });
           }, 1000);
         }
       }, 1100);
@@ -1865,14 +1885,13 @@
       document.body.appendChild(lantern);
       setTimeout(() => lantern.remove(), 13000);
 
-      // Confetti celebration
+      // Confetti celebration & toast confirmation
       triggerCardConfetti();
-      showToast("🎉 Your blessing & keepsake card were posted to the Blessings Wall!");
-      scrollToSection('rsvpSection');
+      showToast("🎉 Your blessing was saved to the Wall & Google Drive!");
 
-      // 2. Render Card to Image and Sync to Google Drive & Google Sheet
+      // 2. Render Card to High-Res Image (Scale 3 for zero quality loss) & Sync to Google Drive / Sheet
       html2canvas(cardElem, {
-        scale: 1.5,
+        scale: 3,
         useCORS: true,
         backgroundColor: null
       }).then(canvas => {
@@ -1896,7 +1915,6 @@
           body: JSON.stringify(payload)
         }).catch(err => console.log('Apps script sync error:', err));
       }).catch(err => {
-        // Fallback without image if canvas rendering fails
         const payload = {
           type: "WISH",
           name: name,
@@ -1916,20 +1934,67 @@
       });
     }
 
-    function downloadCustomWishCardImage() {
+    function downloadCustomWishCardPDF() {
       const cardElem = document.getElementById('exportWishCard');
-      showToast("⏳ Rendering Wish Card Image...");
+      showToast("⏳ Rendering High-Definition Wish Card PDF...");
       
       html2canvas(cardElem, {
-        scale: 2,
+        scale: 3,
+        useCORS: true,
+        backgroundColor: null
+      }).then(canvas => {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({
+          orientation: 'portrait',
+          unit: 'mm',
+          format: 'a5'
+        });
+
+        const imgData = canvas.toDataURL('image/png');
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        
+        const margin = 10;
+        const availableWidth = pageWidth - (margin * 2);
+        const availableHeight = pageHeight - (margin * 2);
+        const imgRatio = canvas.width / canvas.height;
+        
+        let renderWidth = availableWidth;
+        let renderHeight = availableWidth / imgRatio;
+        
+        if (renderHeight > availableHeight) {
+          renderHeight = availableHeight;
+          renderWidth = availableHeight * imgRatio;
+        }
+        
+        const posX = (pageWidth - renderWidth) / 2;
+        const posY = (pageHeight - renderHeight) / 2;
+
+        pdf.addImage(imgData, 'PNG', posX, posY, renderWidth, renderHeight, '', 'FAST');
+        const safeName = (document.getElementById('cardNameInput').value.trim() || 'Guest').replace(/[^a-zA-Z0-9]/g, '_');
+        pdf.save(`Diksha_Mohit_Wish_Card_${safeName}.pdf`);
+        showToast("✅ Crystal-Clear Keepsake PDF Downloaded!");
+      }).catch(err => {
+        console.error(err);
+        downloadCustomWishCardImage();
+      });
+    }
+
+    function downloadCustomWishCardImage() {
+      const cardElem = document.getElementById('exportWishCard');
+      showToast("⏳ Rendering High-Res Wish Card PNG...");
+      
+      html2canvas(cardElem, {
+        scale: 3,
         useCORS: true,
         backgroundColor: null
       }).then(canvas => {
         const link = document.createElement('a');
-        link.download = `Diksha_Mohit_Wish_Card_${document.getElementById('cardNameInput').value.replace(/\s+/g, '_')}.png`;
+        const safeName = (document.getElementById('cardNameInput').value.trim() || 'Guest').replace(/[^a-zA-Z0-9]/g, '_');
+        link.download = `Diksha_Mohit_Wish_Card_${safeName}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
-        showToast("✅ Wish Card Image Downloaded!");
+        showToast("✅ High-Res Wish Card Image Downloaded!");
       }).catch(err => {
         console.error(err);
         showToast("Card image generated and ready!");
@@ -1948,6 +2013,33 @@
       document.getElementById('invitationPrintModal').classList.add('hidden');
     }
 
+    function downloadInvitationPDFDoc() {
+      showToast("⏳ Generating High-Definition 2-Page Invitation PDF...");
+      const p1 = document.getElementById('invitePage1');
+      const p2 = document.getElementById('invitePage2');
+
+      html2canvas(p1, { scale: 3, useCORS: true }).then(c1 => {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+        const imgData1 = c1.toDataURL('image/png');
+        const pw = pdf.internal.pageSize.getWidth();
+        const ph = pdf.internal.pageSize.getHeight();
+        
+        pdf.addImage(imgData1, 'PNG', 10, 10, pw - 20, ph - 20, '', 'FAST');
+        
+        html2canvas(p2, { scale: 3, useCORS: true }).then(c2 => {
+          pdf.addPage();
+          const imgData2 = c2.toDataURL('image/png');
+          pdf.addImage(imgData2, 'PNG', 10, 10, pw - 20, ph - 20, '', 'FAST');
+          pdf.save('Diksha_Mohit_Wedding_Invitation_2_Pages.pdf');
+          showToast("✅ 2-Page High-Res Invitation PDF Downloaded!");
+        });
+      }).catch(err => {
+        console.error(err);
+        window.print();
+      });
+    }
+
     function printInvitationPDF() {
       window.print();
     }
@@ -1958,14 +2050,14 @@
       const p1 = document.getElementById('invitePage1');
       const p2 = document.getElementById('invitePage2');
 
-      html2canvas(p1, { scale: 2, useCORS: true }).then(c1 => {
+      html2canvas(p1, { scale: 3, useCORS: true }).then(c1 => {
         const l1 = document.createElement('a');
         l1.download = 'Diksha_Mohit_Wedding_Invitation_Page_1.png';
         l1.href = c1.toDataURL('image/png');
         l1.click();
 
         setTimeout(() => {
-          html2canvas(p2, { scale: 2, useCORS: true }).then(c2 => {
+          html2canvas(p2, { scale: 3, useCORS: true }).then(c2 => {
             const l2 = document.createElement('a');
             l2.download = 'Diksha_Mohit_Wedding_Invitation_Page_2.png';
             l2.href = c2.toDataURL('image/png');
@@ -2239,9 +2331,13 @@
       });
     }
 
-    // Initialize wishes & quiz on load
+    // Initialize wishes, quiz & force top scroll on load
     loadWishes();
     renderQuizQuestion(0);
+    window.scrollTo(0, 0);
+    window.addEventListener('load', () => {
+      window.scrollTo(0, 0);
+    });
   </script>
 </body>
 </html>
