@@ -153,32 +153,6 @@
   <audio id="weddingAudio" src="assets/Sajna.mp3?v=full" loop preload="auto"></audio>
 
   <!-- ========================================================
-       TOP MUSIC & UTILITY BAR
-       ======================================================== -->
-  <div class="fixed top-3 right-3 sm:top-4 sm:right-4 z-50 flex items-center space-x-2 bg-white/95 backdrop-blur-md px-3 sm:px-4 py-2 rounded-full border border-goldFoil/40 shadow-card">
-    
-    <!-- Music Player Toggle Button (Plays Sajna) -->
-    <button id="musicToggleBtn" onclick="toggleWeddingMusic()" title="Play / Pause Wedding Song: Sajna" class="text-royalMaroon hover:text-goldFoil transition flex items-center gap-1.5 sm:gap-2 text-xs font-semibold">
-      <div id="soundEqBars" class="flex items-end gap-0.5 h-3.5 pb-0.5">
-        <span class="w-0.5 bg-goldFoil rounded-full eq-bar-1 h-3"></span>
-        <span class="w-0.5 bg-goldFoil rounded-full eq-bar-2 h-2"></span>
-        <span class="w-0.5 bg-goldFoil rounded-full eq-bar-3 h-3.5"></span>
-      </div>
-      <i id="musicIcon" class="fa-solid fa-music text-goldFoil animate-pulse"></i>
-      <span id="musicStatus" class="tracking-wider uppercase text-[10px] sm:text-xs">Sajna ON</span>
-    </button>
-    
-    <span class="text-goldFoil/30">|</span>
-
-    <!-- 2-Page Invitation Download Button -->
-    <button onclick="openInvitationPrintModal()" class="text-deepRose hover:text-royalMaroon text-xs font-semibold flex items-center gap-1 transition bg-blushPink/80 hover:bg-blushPink px-2.5 py-1 rounded-full border border-softRose/50">
-      <i class="fa-solid fa-file-arrow-down text-goldFoil text-[11px]"></i>
-      <span class="text-[10px] sm:text-[11px]">2-Page PDF / Card</span>
-    </button>
-  </div>
-
-
-  <!-- ========================================================
        ROYAL WAX-SEALED ENVELOPE OPENING OVERLAY
        ======================================================== -->
   <div id="envelopeOverlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[#FAF7F2]/95 backdrop-blur-md transition-opacity duration-1000 p-4">
@@ -216,7 +190,7 @@
 
         <!-- Open Invitation Button -->
         <div class="mt-6">
-          <button onclick="openWeddingInvitation()" class="px-8 py-3.5 bg-gradient-to-r from-[#9E2A2B] via-[#721C24] to-[#9E2A2B] text-white font-cinzel text-xs uppercase tracking-[0.2em] font-semibold rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 border border-goldFoil flex items-center justify-center gap-2 mx-auto">
+          <button onclick="openWeddingInvitation()" class="px-8 py-3.5 bg-gradient-to-r from-[#9E2A2B] via-[#721C24] to-[#9E2A2B] text-white font-cinzel text-xs uppercase tracking-[0.2em] font-semibold rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 border border-goldFoil flex items-center justify-center gap-2 mx-auto cursor-pointer">
             <i class="fa-regular fa-envelope-open text-sm text-goldFoil"></i>
             <span>OPEN INVITATION</span>
           </button>
@@ -236,52 +210,69 @@
 
 
   <!-- ========================================================
-       STICKY TOP NAVIGATION BAR
+       STICKY TOP NAVIGATION BAR (STREAMLINED & RESPONSIVE)
        ======================================================== -->
-  <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-goldFoil/20 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-2">
+  <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-goldFoil/20 shadow-sm">
+    <div class="max-w-6xl mx-auto px-3 sm:px-4 py-2 sm:py-2.5 flex items-center justify-between gap-2">
       
       <!-- Monogram Logo -->
-      <a href="#heroSection" class="flex items-center space-x-2">
-        <div class="w-8 h-8 rounded-full bg-royalMaroon text-amber-100 flex items-center justify-center font-cinzel text-xs font-bold border border-goldFoil">
+      <a href="#heroSection" class="flex items-center space-x-1.5 shrink-0">
+        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-royalMaroon text-amber-100 flex items-center justify-center font-cinzel text-xs font-bold border border-goldFoil shadow-xs">
           DM
         </div>
-        <span class="font-cinzel text-xs sm:text-sm font-semibold tracking-wider text-royalMaroon hidden xs:inline">DIKSHA &amp; MOHIT</span>
+        <span class="font-cinzel text-xs sm:text-sm font-semibold tracking-wider text-royalMaroon hidden md:inline">DIKSHA &amp; MOHIT</span>
       </a>
 
-      <!-- Event & Interactive Tabs -->
-      <div class="flex items-center space-x-1 sm:space-x-2 text-xs font-medium overflow-x-auto py-0.5 scrollbar-none">
+      <!-- Event Tabs (Smooth Horizontal Scroll on Mobile) -->
+      <div class="flex items-center space-x-1 text-xs font-medium overflow-x-auto py-0.5 scrollbar-none">
         <button onclick="scrollToSection('haldiSection')" class="px-2 sm:px-2.5 py-1 rounded-full text-amber-800 hover:bg-amber-100/80 transition flex items-center gap-1 shrink-0">
-          <i class="fa-solid fa-sun text-amber-500 text-[10px]"></i> Haldi
+          <i class="fa-solid fa-sun text-amber-500 text-[10px]"></i> <span class="text-[11px] sm:text-xs">Haldi</span>
         </button>
         <button onclick="scrollToSection('mehandiSection')" class="px-2 sm:px-2.5 py-1 rounded-full text-emerald-800 hover:bg-emerald-100/80 transition flex items-center gap-1 shrink-0">
-          <i class="fa-solid fa-leaf text-emerald-600 text-[10px]"></i> Mehandi
+          <i class="fa-solid fa-leaf text-emerald-600 text-[10px]"></i> <span class="text-[11px] sm:text-xs">Mehandi</span>
         </button>
         <button onclick="scrollToSection('sangeetSection')" class="px-2 sm:px-2.5 py-1 rounded-full text-purple-900 hover:bg-purple-100/80 transition flex items-center gap-1 shrink-0">
-          <i class="fa-solid fa-music text-purple-600 text-[10px]"></i> Sangeet
+          <i class="fa-solid fa-music text-purple-600 text-[10px]"></i> <span class="text-[11px] sm:text-xs">Sangeet</span>
         </button>
         <button onclick="scrollToSection('weddingSection')" class="px-2 sm:px-2.5 py-1 rounded-full text-rose-900 hover:bg-rose-100/80 transition flex items-center gap-1 shrink-0">
-          <i class="fa-solid fa-fire text-rose-600 text-[10px]"></i> Vivah
+          <i class="fa-solid fa-fire text-rose-600 text-[10px]"></i> <span class="text-[11px] sm:text-xs">Vivah</span>
         </button>
-        <button onclick="scrollToSection('diyaSection')" class="px-2 sm:px-2.5 py-1 rounded-full text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-300/60 transition flex items-center gap-1 shrink-0 font-semibold">
-          <span>🪔</span> Diya
+        <button onclick="scrollToSection('quizSection')" class="px-2 sm:px-2.5 py-1 rounded-full text-purple-900 bg-purple-50 hover:bg-purple-100 border border-purple-200 transition flex items-center gap-1 shrink-0 font-semibold">
+          <span>🧠</span> <span class="text-[11px] sm:text-xs">Quiz</span>
         </button>
-        <button onclick="scrollToSection('quizSection')" class="px-2 sm:px-2.5 py-1 rounded-full text-purple-900 bg-purple-50 hover:bg-purple-100 border border-purple-300/60 transition flex items-center gap-1 shrink-0 font-semibold">
-          <span>🧠</span> Quiz
+        <button onclick="scrollToSection('photoDropSection')" class="px-2 sm:px-2.5 py-1 rounded-full text-rose-900 bg-rose-50 hover:bg-rose-100 border border-rose-200 transition flex items-center gap-1 shrink-0 font-semibold">
+          <span>📸</span> <span class="text-[11px] sm:text-xs">Photos</span>
         </button>
-        <button onclick="scrollToSection('photoDropSection')" class="px-2 sm:px-2.5 py-1 rounded-full text-rose-900 bg-rose-50 hover:bg-rose-100 border border-rose-300/60 transition flex items-center gap-1 shrink-0 font-semibold">
-          <span>📸</span> Photos
+        <button onclick="scrollToSection('wishCardSection')" class="px-2 sm:px-2.5 py-1 rounded-full text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition flex items-center gap-1 shrink-0 font-semibold">
+          <span>💌</span> <span class="text-[11px] sm:text-xs">Wishes</span>
         </button>
       </div>
 
-      <!-- Quick Actions -->
-      <div class="flex items-center gap-2">
-        <a href="#wishCardSection" class="hidden md:inline-block px-3 py-1.5 bg-ivory text-royalMaroon border border-goldFoil/40 font-cinzel text-[10px] font-semibold rounded-full hover:bg-lightGold transition tracking-wider">
-          <i class="fa-solid fa-wand-magic-sparkles text-goldFoil"></i> Wish Card
-        </a>
-        <a href="#rsvpSection" class="px-3.5 py-1.5 bg-royalMaroon text-white font-cinzel text-[11px] font-semibold rounded-full hover:bg-deepRose transition tracking-wider shadow-sm">
+      <!-- Right Utility Actions: Music Toggle, PDF, RSVP -->
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        
+        <!-- Music Player Toggle Button (Compact & Integrated) -->
+        <button id="musicToggleBtn" onclick="toggleWeddingMusic()" title="Play / Pause Sajna" class="px-2 sm:px-2.5 py-1 bg-ivory hover:bg-lightGold text-royalMaroon rounded-full border border-goldFoil/30 transition flex items-center gap-1 text-xs font-semibold cursor-pointer shadow-2xs">
+          <div id="soundEqBars" class="flex items-end gap-0.5 h-3 pb-0.5">
+            <span class="w-0.5 bg-goldFoil rounded-full eq-bar-1 h-2.5"></span>
+            <span class="w-0.5 bg-goldFoil rounded-full eq-bar-2 h-1.5"></span>
+            <span class="w-0.5 bg-goldFoil rounded-full eq-bar-3 h-3"></span>
+          </div>
+          <i id="musicIcon" class="fa-solid fa-music text-goldFoil text-[11px] animate-pulse"></i>
+          <span id="musicStatus" class="tracking-wider uppercase text-[10px] hidden sm:inline">Sajna ON</span>
+        </button>
+
+        <!-- 2-Page PDF Modal Button -->
+        <button onclick="openInvitationPrintModal()" title="Download Printable PDF Invitation" class="px-2 sm:px-2.5 py-1 bg-blushPink hover:bg-pink-100 text-deepRose rounded-full border border-softRose/60 transition flex items-center gap-1 text-xs font-semibold cursor-pointer shadow-2xs">
+          <i class="fa-solid fa-file-pdf text-goldFoil text-[11px]"></i>
+          <span class="text-[10px] hidden sm:inline">PDF</span>
+        </button>
+
+        <!-- RSVP Button -->
+        <button onclick="scrollToSection('rsvpSection')" class="px-2.5 sm:px-3.5 py-1 bg-royalMaroon hover:bg-deepRose text-white font-cinzel text-[10px] sm:text-xs font-semibold rounded-full transition tracking-wider shadow-sm cursor-pointer">
           RSVP
-        </a>
+        </button>
+
       </div>
 
     </div>
@@ -686,74 +677,7 @@
 
 
   <!-- ========================================================
-       1. VIRTUAL DIYA LIGHTING & SACRED COURTYARD
-       ======================================================== -->
-  <section id="diyaSection" class="relative z-10 py-12 px-4 max-w-5xl mx-auto">
-    <div class="bg-gradient-to-br from-[#0F172A] via-[#1E1B4B] to-[#0A0E1A] rounded-3xl p-6 sm:p-10 border border-goldFoil/50 shadow-2xl text-center text-amber-100 space-y-6 relative overflow-hidden">
-      
-      <!-- Glowing Background Ambient Aura -->
-      <div class="absolute -top-20 -left-20 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-      <!-- Auspicious Sanskrit Shloka -->
-      <div class="space-y-1 relative z-10">
-        <p class="font-hindi text-goldFoil text-base sm:text-lg">॥ शुभं करोति कल्याणम् आरोग्यं धनसंपदा ॥</p>
-        <p class="font-hindi text-amber-200/70 text-xs sm:text-sm">शत्रुबुद्धिविनाशाय दीपज्योतिर्नमोऽस्तु ते ॥</p>
-        <h3 class="font-serif text-3xl sm:text-4xl text-white font-semibold pt-1">Light a Sacred Diya for the Couple</h3>
-        <p class="text-xs sm:text-sm text-amber-100/70 max-w-lg mx-auto leading-relaxed">
-          Illuminate a golden diya to bless Diksha &amp; Mohit with everlasting joy, glowing health, eternal prosperity, and deep love.
-        </p>
-      </div>
-
-      <!-- Sacred Floating Diya Display -->
-      <div class="relative z-10 py-3 flex flex-col items-center justify-center">
-        
-        <!-- The Interactive Grand Golden Diya -->
-        <div id="mainDiyaVisual" class="relative cursor-pointer group transition-transform duration-500 hover:scale-105" onclick="lightVirtualDiya()" title="Click to Light a Diya">
-          <!-- Flame with Pulsing Glow -->
-          <div id="diyaFlame" class="w-8 h-12 mx-auto rounded-full bg-gradient-to-t from-amber-500 via-yellow-300 to-white shadow-[0_0_40px_rgba(251,191,36,0.95)] animate-pulse transition-all duration-700"></div>
-          <!-- Wick -->
-          <div class="w-1.5 h-3 bg-amber-900 mx-auto rounded-t-sm -mt-1"></div>
-          <!-- Clay / Gold Diya Base -->
-          <div class="w-32 h-11 mx-auto rounded-b-full bg-gradient-to-r from-[#92400E] via-[#D97706] to-[#78350F] border-2 border-amber-300 shadow-2xl flex items-center justify-center text-amber-200 text-xs font-cinzel font-bold tracking-wider">
-            <span>🪔 BLESSINGS</span>
-          </div>
-          <!-- Shadow Base -->
-          <div class="w-40 h-3 bg-amber-950/60 rounded-full mx-auto -mt-1 blur-xs"></div>
-        </div>
-
-        <!-- Live Counter Pill -->
-        <div class="mt-5 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-amber-400/30 backdrop-blur-sm text-xs font-semibold text-amber-200 shadow-sm">
-          <i class="fa-solid fa-fire text-amber-400 animate-bounce"></i>
-          <span id="diyasCountText"><strong id="diyasCountNum" class="text-white text-sm font-bold">164</strong> Sacred Diyas Lit by Loved Ones</span>
-        </div>
-
-      </div>
-
-      <!-- Light Diya Input & Action -->
-      <div class="relative z-10 max-w-md mx-auto space-y-3">
-        <div class="flex gap-2">
-          <input type="text" id="diyaUserName" placeholder="Enter your name (e.g. Rahul &amp; Neha)" class="flex-1 px-4 py-2.5 rounded-xl bg-white/10 border border-amber-300/30 text-white placeholder-amber-200/50 text-xs focus:outline-none focus:border-amber-400"/>
-          <button onclick="lightVirtualDiya()" class="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-cinzel text-xs font-bold rounded-xl shadow-lg active:scale-95 transition flex items-center gap-1.5 cursor-pointer">
-            <i class="fa-solid fa-sparkles text-sm"></i> Light Diya
-          </button>
-        </div>
-        
-        <!-- Live Courtyard of Recently Lit Diyas -->
-        <div class="pt-2">
-          <p class="text-[10px] uppercase tracking-wider text-amber-300/60 font-semibold mb-2">Sacred Courtyard (Recent Well-Wishers)</p>
-          <div id="diyasCourtyardList" class="flex flex-wrap justify-center gap-2 max-h-24 overflow-y-auto pr-1">
-            <!-- Rendered dynamically by JS -->
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ========================================================
-       2. HOW WELL DO YOU KNOW DIKSHA & MOHIT? WEDDING QUIZ
+       1. HOW WELL DO YOU KNOW DIKSHA & MOHIT? WEDDING QUIZ
        ======================================================== -->
   <section id="quizSection" class="relative z-10 py-12 px-4 max-w-4xl mx-auto">
     <div class="bg-white rounded-3xl p-6 sm:p-10 border border-goldFoil/40 shadow-royal space-y-6">
@@ -825,7 +749,7 @@
 
 
   <!-- ========================================================
-       3. GUEST PHOTO DROP & "LIVE WEDDING MOMENTS" QR ALBUM HUB
+       2. GUEST PHOTO DROP & "LIVE WEDDING MOMENTS" QR ALBUM HUB
        ======================================================== -->
   <section id="photoDropSection" class="relative z-10 py-12 px-4 max-w-5xl mx-auto">
     <div class="bg-white rounded-3xl p-6 sm:p-10 border border-goldFoil/40 shadow-royal space-y-8">
@@ -906,7 +830,7 @@
 
 
   <!-- ========================================================
-       CUSTOMIZABLE WISH CARDS (12 THEMES, LIVE PREVIEW & DOWNLOAD)
+       3. CUSTOMIZABLE WISH CARDS (12 THEMES, LIVE PREVIEW & DOWNLOAD)
        ======================================================== -->
   <section id="wishCardSection" class="relative z-10 py-12 px-4 max-w-5xl mx-auto">
     <div class="bg-white rounded-3xl p-6 sm:p-10 border border-goldFoil/40 shadow-royal space-y-8">
@@ -926,7 +850,7 @@
           
           <div>
             <label class="block font-semibold text-charcoal mb-1">Your Name / Family Name</label>
-            <input type="text" id="cardNameInput" oninput="updateWishCardLive()" placeholder="e.g. Priya &amp; Rohan" value="Priya Sharma" class="w-full px-3.5 py-2.5 rounded-xl bg-ivory border border-goldFoil/30 text-charcoal focus:outline-none focus:border-goldFoil"/>
+            <input type="text" id="cardNameInput" oninput="updateWishCardLive()" placeholder="e.g. Anvesha &amp; Family" value="Anvesha" class="w-full px-3.5 py-2.5 rounded-xl bg-ivory border border-goldFoil/30 text-charcoal focus:outline-none focus:border-goldFoil"/>
           </div>
 
           <div>
@@ -985,16 +909,16 @@
             <div class="flex items-center justify-between bg-ivory px-3 py-1.5 rounded-2xl border border-goldFoil/30 shadow-sm">
               <span class="text-[10px] uppercase font-bold text-royalMaroon tracking-wider"><i class="fa-solid fa-wand-magic-sparkles text-goldFoil"></i> Live Magic:</span>
               <div class="flex items-center gap-1">
-                <button onclick="triggerCardFlowerShower()" title="Shower Fragrant Flowers" class="px-2 py-1 rounded-full bg-rose-100 hover:bg-rose-200 text-rose-800 text-[10px] font-semibold transition active:scale-95 flex items-center gap-1 shadow-xs">
+                <button onclick="triggerCardFlowerShower()" title="Shower Fragrant Flowers" class="px-2 py-1 rounded-full bg-rose-100 hover:bg-rose-200 text-rose-800 text-[10px] font-semibold transition active:scale-95 flex items-center gap-1 shadow-xs cursor-pointer">
                   🌸 Flowers
                 </button>
-                <button onclick="triggerCardConfetti()" title="Pop Party Confetti" class="px-2 py-1 rounded-full bg-purple-100 hover:bg-purple-200 text-purple-800 text-[10px] font-semibold transition active:scale-95 flex items-center gap-1 shadow-xs">
+                <button onclick="triggerCardConfetti()" title="Pop Party Confetti" class="px-2 py-1 rounded-full bg-purple-100 hover:bg-purple-200 text-purple-800 text-[10px] font-semibold transition active:scale-95 flex items-center gap-1 shadow-xs cursor-pointer">
                   🎉 Poppers
                 </button>
-                <button onclick="triggerCardSparkles()" title="Golden Sparkle Magic" class="px-2 py-1 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-800 text-[10px] font-semibold transition active:scale-95 flex items-center gap-1 shadow-xs">
+                <button onclick="triggerCardSparkles()" title="Golden Sparkle Magic" class="px-2 py-1 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-800 text-[10px] font-semibold transition active:scale-95 flex items-center gap-1 shadow-xs cursor-pointer">
                   ✨ Sparkles
                 </button>
-                <button onclick="triggerCardHearts()" title="Love Heart Shower" class="px-2 py-1 rounded-full bg-red-100 hover:bg-red-200 text-red-800 text-[10px] font-semibold transition active:scale-95 flex items-center gap-1 shadow-xs">
+                <button onclick="triggerCardHearts()" title="Love Heart Shower" class="px-2 py-1 rounded-full bg-red-100 hover:bg-red-200 text-red-800 text-[10px] font-semibold transition active:scale-95 flex items-center gap-1 shadow-xs cursor-pointer">
                   💖 Hearts
                 </button>
               </div>
@@ -1030,7 +954,7 @@
 
               <!-- Sender Signature -->
               <div class="pt-2 border-t border-current/20 space-y-0.5 relative z-10">
-                <h5 id="cardPreviewName" class="font-serif text-lg font-bold">Priya Sharma</h5>
+                <h5 id="cardPreviewName" class="font-serif text-lg font-bold">Anvesha</h5>
                 <p id="cardPreviewRelation" class="text-[10px] uppercase tracking-wider font-semibold opacity-75">Bride's Squad &hearts;</p>
                 <p class="text-[9px] opacity-60 tracking-widest font-mono">26-27 NOV 2026 &bull; BLESSINGS</p>
               </div>
@@ -1038,18 +962,8 @@
             </div>
 
             <div class="mt-2 text-center">
-              <button onclick="downloadCustomWishCardImage()" class="text-xs text-royalMaroon hover:text-goldFoil font-semibold flex items-center justify-center gap-1.5 mx-auto">
+              <button onclick="downloadCustomWishCardImage()" class="text-xs text-royalMaroon hover:text-goldFoil font-semibold flex items-center justify-center gap-1.5 mx-auto cursor-pointer">
                 <i class="fa-solid fa-image text-goldFoil"></i> Download Wish Card as High-Res PNG
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-                <i class="fa-solid fa-image"></i> Click to Download Card as PNG
               </button>
             </div>
           </div>
@@ -1757,33 +1671,34 @@
       const song = document.getElementById('cardSongInput').value.trim();
 
       document.getElementById('cardPreviewName').innerText = name;
-      document.getElementById('cardPreviewRelation').innerText = relation;
-      document.getElementById('cardPreviewMsg').innerText = `"${msg}"`;
-
-      const songWrap = document.getElementById('cardPreviewSongWrap');
-      if (song) {
-        songWrap.style.display = 'inline-block';
-        document.getElementById('cardPreviewSong').innerText = `Dedicated Song: ${song}`;
-      } else {
-        songWrap.style.display = 'none';
-      }
-    }
-
-    // Default Seed Wishes
+      d    // Default Seed Wishes
     const defaultWishes = [
-      { name: "Sharma Family", relation: "Family Blessings", msg: "May Diksha and Mohit's bond grow stronger with each passing day. Wishing you endless smiles, prosperity, and love!", song: "Sajna", theme: "gold", time: "Just now" },
+      { name: "Anvesha", relation: "Bride's Squad &hearts;", msg: "May Diksha and Mohit's bond grow stronger with each passing day. Wishing you endless smiles, prosperity, and unconditional love!", song: "Sajna", theme: "gold", time: "Just now" },
       { name: "College Friends Squad", relation: "Friends &hearts;", msg: "Can't wait to rock the Sangeet dance battle and celebrate the most beautiful couple!", song: "Sajna", theme: "violet", time: "1 hour ago" },
-      { name: "Verma &amp; Gupta Family", relation: "Relatives", msg: "Blessings and love to dear Diksha & Mohit for a blissful married life ahead!", song: "Sajna", theme: "emerald", time: "2 hours ago" }
+      { name: "Verma &amp; Gupta Family", relation: "Relatives", msg: "Blessings and love to dear Diksha &amp; Mohit for a blissful married life ahead!", song: "Sajna", theme: "emerald", time: "2 hours ago" }
     ];
 
+    // Live Cloud Storage & Local Cache for Wishes
+    const CLOUD_STORAGE_KEY = 'diksha_mohit_live_wishes_v1';
+
     function loadWishes() {
-      const stored = localStorage.getItem('diksha_mohit_wishes');
-      const list = stored ? JSON.parse(stored) : defaultWishes;
+      const stored = localStorage.getItem(CLOUD_STORAGE_KEY) || localStorage.getItem('diksha_mohit_wishes');
+      let list = stored ? JSON.parse(stored) : defaultWishes;
+      
+      // Update any previous "Priya Sharma" occurrences in cache to "Anvesha"
+      list = list.map(w => {
+        if (w.name === 'Priya Sharma' || w.name === 'Sharma Family') {
+          return { ...w, name: 'Anvesha', relation: "Bride's Squad &hearts;" };
+        }
+        return w;
+      });
+
       renderWishesList(list);
     }
 
     function renderWishesList(list) {
       const container = document.getElementById('loggedWishesList');
+      if (!container) return;
       container.innerHTML = '';
       list.forEach((w) => {
         const card = document.createElement('div');
@@ -1809,7 +1724,7 @@
     }
 
     function saveAndPostWishCard() {
-      const name = document.getElementById('cardNameInput').value.trim() || 'Well-wisher';
+      const name = document.getElementById('cardNameInput').value.trim() || 'Anvesha';
       const relation = document.getElementById('cardRelationInput').value.trim() || 'Guest';
       const msg = document.getElementById('cardMessageInput').value.trim();
       const song = document.getElementById('cardSongInput').value.trim();
@@ -1825,16 +1740,19 @@
         msg,
         song,
         theme: currentCardTheme,
-        time: 'Just now'
+        time: 'Just now',
+        timestamp: new Date().toISOString()
       };
 
-      const stored = localStorage.getItem('diksha_mohit_wishes');
+      // Save locally
+      const stored = localStorage.getItem(CLOUD_STORAGE_KEY) || localStorage.getItem('diksha_mohit_wishes');
       const list = stored ? JSON.parse(stored) : [...defaultWishes];
       list.unshift(newWish);
+      localStorage.setItem(CLOUD_STORAGE_KEY, JSON.stringify(list));
       localStorage.setItem('diksha_mohit_wishes', JSON.stringify(list));
       renderWishesList(list);
 
-      // Launch floating sky lantern
+      // Launch floating sky lantern animation
       const lantern = document.createElement('div');
       lantern.className = 'floating-lantern text-amber-500 text-3xl drop-shadow-md z-50';
       lantern.style.left = (Math.random() * 70 + 15) + '%';
@@ -1845,7 +1763,7 @@
 
       // Confetti celebration
       triggerCardConfetti();
-      showToast("🎉 Your custom wish card was posted to the Blessings Wall!");
+      showToast("🎉 Your blessing was posted to the Royal Blessings Wall!");
       scrollToSection('rsvpSection');
     }
 
@@ -1911,14 +1829,31 @@
 
 
     /* =========================================================
-       8. RSVP SUBMIT, CALENDAR & WHATSAPP
+       8. RSVP SUBMISSION & LIVE STORAGE
        ======================================================== */
     function handleRSVPSubmit(e) {
       e.preventDefault();
-      const name = document.getElementById('rsvpName').value;
+      const name = document.getElementById('rsvpName').value.trim();
+      const eventChoice = document.getElementById('rsvpEvent').value;
       const count = document.getElementById('rsvpCount').value;
+      const song = document.getElementById('rsvpSong').value.trim();
+
+      const rsvpData = {
+        name,
+        event: eventChoice,
+        guestCount: count,
+        songRequest: song,
+        submittedAt: new Date().toLocaleString()
+      };
+
+      // Save to RSVP registry
+      const storedRSVPs = JSON.parse(localStorage.getItem('diksha_mohit_rsvps_list') || '[]');
+      storedRSVPs.unshift(rsvpData);
+      localStorage.setItem('diksha_mohit_rsvps_list', JSON.stringify(storedRSVPs));
+
       triggerCardFlowerShower();
-      showToast(`🎉 Thank you, ${name}! Your RSVP for ${count} guest(s) is warmly received!`);
+      showToast(`🎉 Thank you, ${name}! Your RSVP for ${count} guest(s) is confirmed & logged!`);
+      
       document.getElementById('rsvpName').value = '';
       document.getElementById('rsvpSong').value = '';
     }
@@ -1990,81 +1925,7 @@
 
 
     /* =========================================================
-       9. VIRTUAL DIYA LIGHTING & SACRED COURTYARD
-       ========================================================= */
-    const defaultDiyas = [
-      { name: "Ananya & Family", time: "Just now" },
-      { name: "Rohan Verma", time: "10 mins ago" },
-      { name: "Simran & Besties", time: "25 mins ago" },
-      { name: "The Kapoor Family", time: "1 hour ago" },
-      { name: "Aarav & Meera", time: "2 hours ago" },
-      { name: "Uncle Rajesh & Family", time: "3 hours ago" }
-    ];
-
-    function loadDiyas() {
-      const stored = localStorage.getItem('diksha_mohit_diyas_list');
-      const list = stored ? JSON.parse(stored) : defaultDiyas;
-      const count = parseInt(localStorage.getItem('diksha_mohit_diyas_count') || '164', 10);
-      const countEl = document.getElementById('diyasCountNum');
-      if (countEl) countEl.innerText = count;
-      renderDiyasCourtyard(list);
-    }
-
-    function renderDiyasCourtyard(list) {
-      const container = document.getElementById('diyasCourtyardList');
-      if (!container) return;
-      container.innerHTML = '';
-      list.slice(0, 12).forEach(item => {
-        const span = document.createElement('span');
-        span.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-300/30 text-amber-200 text-[11px] shadow-sm';
-        span.innerHTML = `<span class="text-amber-400 text-xs">🪔</span> <strong class="font-medium text-white">${item.name}</strong> <span class="text-[9px] opacity-60 font-mono">${item.time || ''}</span>`;
-        container.appendChild(span);
-      });
-    }
-
-    function lightVirtualDiya() {
-      const nameInput = document.getElementById('diyaUserName');
-      const name = (nameInput && nameInput.value.trim()) ? nameInput.value.trim() : "Well-Wisher";
-
-      let count = parseInt(localStorage.getItem('diksha_mohit_diyas_count') || '164', 10);
-      count++;
-      localStorage.setItem('diksha_mohit_diyas_count', count.toString());
-      const countEl = document.getElementById('diyasCountNum');
-      if (countEl) countEl.innerText = count;
-
-      const stored = localStorage.getItem('diksha_mohit_diyas_list');
-      const list = stored ? JSON.parse(stored) : [...defaultDiyas];
-      list.unshift({ name, time: 'Just now' });
-      localStorage.setItem('diksha_mohit_diyas_list', JSON.stringify(list));
-      renderDiyasCourtyard(list);
-
-      if (nameInput) nameInput.value = '';
-
-      const flame = document.getElementById('diyaFlame');
-      if (flame) {
-        flame.style.transform = 'scale(1.35)';
-        flame.style.boxShadow = '0 0 50px rgba(251, 191, 36, 1)';
-        setTimeout(() => {
-          flame.style.transform = 'scale(1)';
-          flame.style.boxShadow = '0 0 40px rgba(251, 191, 36, 0.95)';
-        }, 1200);
-      }
-
-      if (typeof confetti === 'function') {
-        confetti({
-          particleCount: 75,
-          spread: 80,
-          origin: { y: 0.65 },
-          colors: ['#FFD700', '#FBBF24', '#FCD34D', '#FFFBEB', '#F59E0B']
-        });
-      }
-
-      showToast(`🪔 Sacred Diya lit by ${name}! Blessings offered to Diksha & Mohit!`);
-    }
-
-
-    /* =========================================================
-       10. HOW WELL DO YOU KNOW THE COUPLE? TRIVIA QUIZ
+       9. HOW WELL DO YOU KNOW THE COUPLE? TRIVIA QUIZ
        ========================================================= */
     const quizData = [
       {
@@ -2233,7 +2094,7 @@
 
 
     /* =========================================================
-       11. GUEST PHOTO DROP LINK COPIER
+       10. GUEST PHOTO DROP LINK COPIER
        ========================================================= */
     function copyPhotoAlbumLink() {
       const url = "https://drive.google.com/drive/folders/1F-tqSIhNY5pOlUUHhxoeEsr1Qzi8YWF4?usp=sharing";
@@ -2244,9 +2105,8 @@
       });
     }
 
-    // Initialize wishes, diyas & quiz on load
+    // Initialize wishes & quiz on load
     loadWishes();
-    loadDiyas();
     renderQuizQuestion(0);
   </script>
 </body>
