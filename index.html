@@ -183,6 +183,86 @@
   <audio id="weddingAudio" src="assets/Sajna.mp3?v=full" loop preload="auto"></audio>
 
   <!-- ========================================================
+       PALACE / TEMPLE 3D DOOR OPENING LANDING EXPERIENCE
+       ======================================================== -->
+  <div id="doorLandingOverlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[#1A0B0E] transition-opacity duration-1000 overflow-hidden select-none p-4">
+    
+    <!-- Ambient Background Glow & Shimmer -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#2B0E14] via-[#1A0B0E] to-[#0D0507] opacity-95"></div>
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Festive Header -->
+    <div class="absolute top-5 sm:top-8 left-0 right-0 text-center z-20 space-y-1 px-4">
+      <p class="font-hindi text-goldFoil text-base sm:text-xl drop-shadow-md">॥ श्री गणेशाय नमः ॥</p>
+      <h2 class="font-serif text-2xl sm:text-4xl text-amber-100 font-semibold tracking-wide">
+        Diksha <span class="text-goldFoil font-script text-3xl sm:text-4xl">&amp;</span> Mohit
+      </h2>
+      <p class="font-cinzel text-[10px] sm:text-xs uppercase tracking-[0.3em] text-goldFoil font-semibold">The Wedding Invitation</p>
+    </div>
+
+    <!-- 3D Door Container -->
+    <div class="relative z-10 w-[90vw] max-w-sm sm:max-w-md aspect-[3/4] max-h-[64vh] flex items-center justify-center my-auto" style="perspective: 1200px;">
+      
+      <!-- Door Arch Outer Frame -->
+      <div class="absolute inset-0 rounded-t-[100px] border-4 border-goldFoil/80 shadow-[0_0_40px_rgba(212,175,55,0.35)] pointer-events-none z-20"></div>
+
+      <!-- Door Inner Glow (Revealed when doors swing open) -->
+      <div class="absolute inset-0 rounded-t-[96px] bg-gradient-to-b from-amber-200 via-rose-100 to-amber-50 flex flex-col items-center justify-center text-center p-6 space-y-3 z-0">
+        <img src="assets/logo.png" alt="DM Seal" class="w-20 h-20 rounded-full shadow-lg border-2 border-goldFoil animate-bounce">
+        <h3 class="font-serif text-3xl text-royalMaroon font-bold">Welcome!</h3>
+        <p class="text-xs text-subtleText max-w-xs font-medium">Entering the wedding celebrations of Diksha &amp; Mohit...</p>
+      </div>
+
+      <!-- Left Palace Door -->
+      <div id="leftDoor" class="w-1/2 h-full bg-gradient-to-br from-[#4A151B] via-[#721C24] to-[#3B0E14] rounded-tl-[96px] border-r border-goldFoil/60 border-l border-t border-goldFoil/40 shadow-2xl relative transition-transform duration-1000 ease-out flex flex-col justify-between p-3.5 z-10 overflow-hidden" style="transform-origin: left center;">
+        <div class="w-full h-full border border-goldFoil/30 rounded-tl-[80px] p-3 flex flex-col justify-between relative">
+          <div class="text-goldFoil/50 text-base text-left"><i class="fa-solid fa-spa"></i></div>
+          <div class="my-auto text-center space-y-2">
+            <div class="w-9 h-9 mx-auto rounded-full border border-goldFoil/50 bg-black/20 flex items-center justify-center text-goldFoil text-xs">
+              <i class="fa-solid fa-om"></i>
+            </div>
+            <div class="w-10 h-0.5 bg-goldFoil/30 mx-auto rounded-full"></div>
+          </div>
+          <!-- Brass Ring Handle -->
+          <div class="absolute right-1.5 top-1/2 -translate-y-1/2 w-5 h-8 rounded-full border-2 border-amber-300 bg-amber-600/40 shadow-md"></div>
+        </div>
+      </div>
+
+      <!-- Right Palace Door -->
+      <div id="rightDoor" class="w-1/2 h-full bg-gradient-to-bl from-[#4A151B] via-[#721C24] to-[#3B0E14] rounded-tr-[96px] border-l border-goldFoil/60 border-r border-t border-goldFoil/40 shadow-2xl relative transition-transform duration-1000 ease-out flex flex-col justify-between p-3.5 z-10 overflow-hidden" style="transform-origin: right center;">
+        <div class="w-full h-full border border-goldFoil/30 rounded-tr-[80px] p-3 flex flex-col justify-between relative">
+          <div class="text-goldFoil/50 text-base text-right"><i class="fa-solid fa-spa"></i></div>
+          <div class="my-auto text-center space-y-2">
+            <div class="w-9 h-9 mx-auto rounded-full border border-goldFoil/50 bg-black/20 flex items-center justify-center text-goldFoil text-xs">
+              <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="w-10 h-0.5 bg-goldFoil/30 mx-auto rounded-full"></div>
+          </div>
+          <!-- Brass Ring Handle -->
+          <div class="absolute left-1.5 top-1/2 -translate-y-1/2 w-5 h-8 rounded-full border-2 border-amber-300 bg-amber-600/40 shadow-md"></div>
+        </div>
+      </div>
+
+      <!-- Center DM Monogram Seal -->
+      <div id="doorCenterSeal" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-500">
+        <img src="assets/logo.png" alt="DM" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-goldFoil shadow-[0_0_35px_rgba(212,175,55,0.9)]">
+      </div>
+
+    </div>
+
+    <!-- Enter Button Below Doors -->
+    <div class="absolute bottom-5 sm:bottom-8 left-0 right-0 text-center z-20 px-4">
+      <button id="openDoorsBtn" onclick="openWeddingDoors()" class="px-8 py-3.5 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-royalMaroon font-cinzel text-xs uppercase tracking-[0.25em] font-bold rounded-full shadow-[0_0_30px_rgba(251,191,36,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-white flex items-center justify-center gap-2 mx-auto cursor-pointer">
+        <i class="fa-solid fa-door-open text-base text-royalMaroon"></i>
+        <span>OPEN DOORS &bull; ENTER</span>
+      </button>
+      <p class="text-[10px] text-amber-200/70 tracking-widest uppercase mt-2 font-medium">Click to open doors &amp; begin celebrations</p>
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================
        AMBIENT CANVAS FOR FLOATING PETALS & SPARKS
        ======================================================== -->
   <canvas id="petalCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
@@ -194,11 +274,9 @@
   <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-goldFoil/20 shadow-sm">
     <div class="max-w-6xl mx-auto px-3 sm:px-4 py-2 sm:py-2.5 flex items-center justify-between gap-2">
       
-      <!-- Monogram Logo -->
-      <a href="#heroSection" class="flex items-center space-x-1.5 shrink-0">
-        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-royalMaroon text-amber-100 flex items-center justify-center font-cinzel text-xs font-bold border border-goldFoil shadow-xs">
-          DM
-        </div>
+      <!-- Rounded DM Monogram Logo -->
+      <a href="#heroSection" class="flex items-center space-x-2 shrink-0">
+        <img src="assets/logo.png" alt="DM" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-goldFoil/60 shadow-xs hover:scale-105 transition">
         <span class="font-cinzel text-xs sm:text-sm font-semibold tracking-wider text-royalMaroon hidden md:inline">DIKSHA &amp; MOHIT</span>
       </a>
 
@@ -574,7 +652,7 @@
 
 
     <!-- ========================================================
-         EVENT 4: THE ROYAL VIVAH (27 Nov, 7:00 PM Onwards)
+         EVENT 4: THE GRAND VIVAH (27 Nov, 7:00 PM Onwards)
          ======================================================== -->
     <article id="weddingSection" class="bg-white rounded-3xl overflow-hidden border border-rose-200/80 shadow-card transition-all duration-300 hover:shadow-royal">
       <div class="grid md:grid-cols-12 gap-0 items-center">
@@ -590,7 +668,7 @@
           </div>
 
           <p class="text-xs sm:text-sm text-subtleText leading-relaxed">
-            The auspicious night of the royal wedding. Witness the Varmala garland exchange, royal dinner feast, followed by the sacred Saat Phere around the Agni kund late into the night.
+            The auspicious night of the wedding celebrations. Witness the Varmala garland exchange, celebratory wedding feast, followed by the sacred Saat Phere around the Agni kund late into the night.
           </p>
 
           <div class="grid grid-cols-2 gap-3 pt-1 text-xs">
@@ -600,7 +678,7 @@
             </div>
             <div class="bg-vivahRed p-3 rounded-xl border border-rose-200">
               <span class="text-[10px] uppercase font-bold text-rose-900 block">Dress Code</span>
-              <span class="font-medium text-charcoal">Royal Ethnic &bull; Traditional</span>
+              <span class="font-medium text-charcoal">Traditional Festive &bull; Ethnic</span>
             </div>
           </div>
 
@@ -1037,7 +1115,7 @@
         <div>
           <div class="space-y-1 mb-3">
             <span class="font-cinzel text-[11px] uppercase tracking-[0.2em] text-goldFoil font-semibold">Guest Blessings</span>
-            <h3 class="font-serif text-2xl sm:text-3xl text-royalMaroon">Royal Blessings Wall</h3>
+            <h3 class="font-serif text-2xl sm:text-3xl text-royalMaroon">Blessings &amp; Wishes Wall</h3>
             <p class="text-xs text-subtleText">Logged wishes and blessings from family &amp; friends</p>
           </div>
 
@@ -1093,13 +1171,12 @@
             <p class="font-hindi text-subtleText text-xs">वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ । निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥</p>
           </div>
 
-          <div class="w-20 h-20 mx-auto rounded-full bg-royalMaroon text-amber-100 flex flex-col items-center justify-center border-2 border-goldFoil shadow-md">
-            <i class="fa-solid fa-crown text-goldFoil text-xs"></i>
-            <span class="font-cinzel text-xl font-bold">D &amp; M</span>
+          <div class="w-20 h-20 mx-auto rounded-full shadow-md overflow-hidden border-2 border-goldFoil">
+            <img src="assets/logo.png" alt="DM Seal" class="w-full h-full object-cover">
           </div>
 
           <div class="space-y-1">
-            <p class="font-cinzel text-xs tracking-[0.25em] uppercase text-goldFoil font-bold">The Royal Wedding Invitation</p>
+            <p class="font-cinzel text-xs tracking-[0.25em] uppercase text-goldFoil font-bold">The Wedding Invitation</p>
             <h1 class="font-serif text-4xl sm:text-5xl text-royalMaroon font-normal">
               Diksha <span class="font-script text-goldFoil text-4xl">&amp;</span> Mohit
             </h1>
@@ -1158,8 +1235,8 @@
             <!-- Vivah -->
             <div class="p-3.5 bg-vivahRed rounded-xl border border-rose-200">
               <span class="font-cinzel text-[10px] font-bold text-rose-900 uppercase block">27 Nov &bull; 07:00 PM+</span>
-              <h4 class="font-serif text-base text-royalMaroon font-bold">The Royal Vivah</h4>
-              <p class="text-[11px] text-subtleText mt-0.5">Warmala &amp; Late Night Saat Phere. Dress Code: Royal Traditional.</p>
+              <h4 class="font-serif text-base text-royalMaroon font-bold">The Grand Vivah</h4>
+              <p class="text-[11px] text-subtleText mt-0.5">Warmala &amp; Late Night Saat Phere. Dress Code: Traditional Festive.</p>
             </div>
 
           </div>
@@ -1183,9 +1260,10 @@
        FOOTER
        ======================================================== -->
   <footer class="py-12 px-4 text-center border-t border-goldFoil/30 bg-white text-subtleText">
-    <div class="max-w-xl mx-auto space-y-2">
+    <div class="max-w-xl mx-auto space-y-2.5">
+      <img src="assets/logo.png" alt="DM Seal" class="w-12 h-12 mx-auto rounded-full shadow-sm border border-goldFoil/40">
       <div class="flex items-center justify-center gap-2">
-        <i class="fa-solid fa-om text-goldFoil text-lg"></i>
+        <i class="fa-solid fa-om text-goldFoil text-base"></i>
         <h4 class="font-cinzel text-base text-royalMaroon font-semibold tracking-widest">DIKSHA &amp; MOHIT</h4>
         <i class="fa-solid fa-heart text-deepRose text-sm"></i>
       </div>
@@ -1249,12 +1327,23 @@
 
 
     /* =========================================================
-       2. ENVELOPE OPENING OVERLAY
+       2. 3D PALACE / TEMPLE DOOR OPENING LANDING EXPERIENCE
        ======================================================== */
-    function openWeddingInvitation() {
-      const overlay = document.getElementById('envelopeOverlay');
-      
-      // Start Sajna music
+    function openWeddingDoors() {
+      const left = document.getElementById('leftDoor');
+      const right = document.getElementById('rightDoor');
+      const seal = document.getElementById('doorCenterSeal');
+      const overlay = document.getElementById('doorLandingOverlay');
+      const btn = document.getElementById('openDoorsBtn');
+
+      if (btn) btn.style.display = 'none';
+      if (seal) seal.style.opacity = '0';
+
+      // 1. 3D Door Swing Open Animation (Outwards)
+      if (left) left.style.transform = 'perspective(1200px) rotateY(-118deg)';
+      if (right) right.style.transform = 'perspective(1200px) rotateY(118deg)';
+
+      // 2. Play Full-Length Sajna Song
       weddingAudio.play().then(() => {
         isPlayingAudio = true;
         const icon = document.getElementById('musicIcon');
@@ -1263,28 +1352,49 @@
         if (icon) icon.className = "fa-solid fa-music text-goldFoil animate-pulse";
         if (status) status.innerText = "Sajna ON";
         if (eq) eq.style.opacity = '1';
-      }).catch(err => console.log(err));
+      }).catch(err => console.log('Audio play error:', err));
 
-      // Grand Celebratory Confetti & Petals
+      // 3. Celebratory Confetti & Petal Shower
       triggerCardConfetti();
-      for (let i = 0; i < 40; i++) {
+      for (let i = 0; i < 45; i++) {
         petals.push(new Petal());
       }
 
-      overlay.style.opacity = '0';
-      overlay.style.pointerEvents = 'none';
+      // 4. Smooth Overlay Fadeout into Landing Page
       setTimeout(() => {
-        overlay.style.display = 'none';
-      }, 1000);
+        if (overlay) {
+          overlay.style.opacity = '0';
+          overlay.style.pointerEvents = 'none';
+          setTimeout(() => {
+            overlay.style.display = 'none';
+          }, 1000);
+        }
+      }, 1100);
     }
 
-    function reopenInvitation() {
-      const overlay = document.getElementById('envelopeOverlay');
-      overlay.style.display = 'flex';
-      setTimeout(() => {
-        overlay.style.opacity = '1';
-        overlay.style.pointerEvents = 'auto';
-      }, 50);
+    function reopenWeddingDoors() {
+      const overlay = document.getElementById('doorLandingOverlay');
+      const left = document.getElementById('leftDoor');
+      const right = document.getElementById('rightDoor');
+      const seal = document.getElementById('doorCenterSeal');
+      const btn = document.getElementById('openDoorsBtn');
+
+      if (overlay) {
+        if (left) left.style.transform = 'perspective(1200px) rotateY(0deg)';
+        if (right) right.style.transform = 'perspective(1200px) rotateY(0deg)';
+        if (seal) seal.style.opacity = '1';
+        if (btn) btn.style.display = 'inline-flex';
+        overlay.style.display = 'flex';
+        setTimeout(() => {
+          overlay.style.opacity = '1';
+          overlay.style.pointerEvents = 'auto';
+        }, 50);
+      }
+    }
+
+    // Alias for backwards compatibility
+    function openWeddingInvitation() {
+      openWeddingDoors();
     }
 
 
@@ -1919,7 +2029,7 @@
 
     function shareOnWhatsApp() {
       const txt = encodeURIComponent(
-        "👑 *You are cordially invited to the Royal Wedding of Diksha & Mohit!*\n\n" +
+        "🌸 *You are cordially invited to the Wedding Celebrations of Diksha & Mohit!*\n\n" +
         "✨ *Celebration Itinerary:*\n" +
         "📅 *26th November 2026:*\n" +
         "• 11:00 AM — Phoolon Ki Haldi 💛\n" +
@@ -1929,7 +2039,7 @@
         "• 07:00 PM Onwards — The Grand Vivah & Sacred Saat Phere 🌹\n\n" +
         "📍 *Venue:* Royal Greens\n" +
         "🗺️ *Directions:* https://share.google/MYqnfmSerxQmfgEvj\n\n" +
-        "💌 *View Royal Invitation, RSVP & Wish Wall:* https://dikshamohit.in\n\n" +
+        "💌 *View Wedding Invitation, RSVP & Blessings Wall:* https://dikshamohit.in\n\n" +
         "Please join us and grace the celebrations with your warm presence and blessings! 🙏✨"
       );
       window.open(`https://api.whatsapp.com/send?text=${txt}`, '_blank');
@@ -2084,7 +2194,7 @@
       const msg = document.getElementById('quizResultMsg');
 
       if (quizScore === 5) {
-        title.innerText = "🏆 Bestie Level: 100% (Royal VIP)";
+        title.innerText = "🏆 Bestie Level: 100% (Wedding VIP)";
         msg.innerText = "Incredible! You know Diksha & Mohit inside out! You are officially an inner circle VIP!";
         triggerCardConfetti();
       } else if (quizScore >= 3) {
@@ -2110,7 +2220,7 @@
     function shareQuizScoreWhatsApp() {
       const txt = encodeURIComponent(
         `🎉 I scored ${quizScore}/5 on Diksha & Mohit's Wedding Trivia Quiz! 👑\n\n` +
-        `Check how well you know the couple and send your blessings on their royal wedding site:\n` +
+        `Check how well you know the couple and send your blessings on their wedding site:\n` +
         `👉 https://dikshamohit.in/#quizSection`
       );
       window.open(`https://api.whatsapp.com/send?text=${txt}`, '_blank');
