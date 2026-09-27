@@ -907,12 +907,12 @@
           
           <div>
             <label class="block font-semibold text-charcoal mb-1">Your Name / Family Name</label>
-            <input type="text" id="cardNameInput" oninput="updateWishCardLive()" placeholder="e.g. Anvesha &amp; Family" value="Anvesha" class="w-full px-3.5 py-2.5 rounded-xl bg-ivory border border-goldFoil/30 text-charcoal focus:outline-none focus:border-goldFoil"/>
+            <input type="text" id="cardNameInput" oninput="updateWishCardLive()" placeholder="e.g. Sai &amp; Family" value="Sai" class="w-full px-3.5 py-2.5 rounded-xl bg-ivory border border-goldFoil/30 text-charcoal focus:outline-none focus:border-goldFoil"/>
           </div>
 
           <div>
             <label class="block font-semibold text-charcoal mb-1">Relationship / Tag</label>
-            <input type="text" id="cardRelationInput" oninput="updateWishCardLive()" placeholder="e.g. Bride's Sister / College Besties" value="Bride's Squad &hearts;" class="w-full px-3.5 py-2.5 rounded-xl bg-ivory border border-goldFoil/30 text-charcoal focus:outline-none focus:border-goldFoil"/>
+            <input type="text" id="cardRelationInput" oninput="updateWishCardLive()" placeholder="e.g. Groom's Friend / College Besties" value="Groom's Friend" class="w-full px-3.5 py-2.5 rounded-xl bg-ivory border border-goldFoil/30 text-charcoal focus:outline-none focus:border-goldFoil"/>
           </div>
 
           <div>
@@ -1018,8 +1018,8 @@
 
               <!-- Sender Signature -->
               <div class="pt-2 border-t border-current/20 space-y-0.5 relative z-10">
-                <h5 id="cardPreviewName" class="font-serif text-lg font-bold">Anvesha</h5>
-                <p id="cardPreviewRelation" class="text-[10px] uppercase tracking-wider font-semibold opacity-75">Bride's Squad &hearts;</p>
+                <h5 id="cardPreviewName" class="font-serif text-lg font-bold">Sai</h5>
+                <p id="cardPreviewRelation" class="text-[10px] uppercase tracking-wider font-semibold opacity-75">Groom's Friend</p>
                 <p class="text-[9px] opacity-60 tracking-widest font-mono">26-27 NOV 2026 &bull; BLESSINGS</p>
               </div>
 
@@ -1784,8 +1784,8 @@
     }
 
     function updateWishCardLive() {
-      const name = document.getElementById('cardNameInput').value.trim() || 'Anvesha';
-      const relation = document.getElementById('cardRelationInput').value.trim() || 'Wedding Guest';
+      const name = document.getElementById('cardNameInput').value.trim() || 'Sai';
+      const relation = document.getElementById('cardRelationInput').value.trim() || "Groom's Friend";
       const msg = document.getElementById('cardMessageInput').value.trim() || 'Wishing Diksha & Mohit eternal joy!';
       const song = document.getElementById('cardSongInput').value.trim();
 
@@ -1811,7 +1811,7 @@
 
     // Default Seed Wishes
     const defaultWishes = [
-      { name: "Anvesha", relation: "Bride's Squad &hearts;", msg: "May Diksha and Mohit's bond grow stronger with each passing day. Wishing you endless smiles, prosperity, and unconditional love!", song: "Sajna", theme: "gold", time: "Just now" },
+      { name: "Sai", relation: "Groom's Friend", msg: "May Diksha and Mohit's bond grow stronger with each passing day. Wishing you endless smiles, prosperity, and unconditional love!", song: "Sajna", theme: "gold", time: "Just now" },
       { name: "College Friends Squad", relation: "Friends &hearts;", msg: "Can't wait to rock the Sangeet dance battle and celebrate the most beautiful couple!", song: "Sajna", theme: "violet", time: "1 hour ago" },
       { name: "Verma &amp; Gupta Family", relation: "Relatives", msg: "Blessings and love to dear Diksha &amp; Mohit for a blissful married life ahead!", song: "Sajna", theme: "emerald", time: "2 hours ago" }
     ];
@@ -1823,13 +1823,18 @@
       const stored = localStorage.getItem(CLOUD_STORAGE_KEY) || localStorage.getItem('diksha_mohit_wishes');
       let list = stored ? JSON.parse(stored) : defaultWishes;
       
-      // Update any previous "Priya Sharma" occurrences in cache to "Anvesha"
+      // Update any previous "Priya Sharma" or "Anvesha" occurrences in cache to "Sai"
+      let needsSave = false;
       list = list.map(w => {
-        if (w.name === 'Priya Sharma' || w.name === 'Sharma Family') {
-          return { ...w, name: 'Anvesha', relation: "Bride's Squad &hearts;" };
+        if (w.name === 'Priya Sharma' || w.name === 'Sharma Family' || w.name === 'Anvesha') {
+          needsSave = true;
+          return { ...w, name: 'Sai', relation: "Groom's Friend" };
         }
         return w;
       });
+      if (needsSave) {
+        try { localStorage.setItem(CLOUD_STORAGE_KEY, JSON.stringify(list)); } catch (e) {}
+      }
 
       renderWishesList(list);
     }
@@ -1865,8 +1870,8 @@
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxqUz41nEOpo2Wkpo4OLVNHer5HteSxf33IWc0z6UzNhd5GsU8X9AK6YDyz7Z7giGUWQg/exec";
 
     function saveAndPostWishCard() {
-      const name = document.getElementById('cardNameInput').value.trim() || 'Anvesha';
-      const relation = document.getElementById('cardRelationInput').value.trim() || 'Guest';
+      const name = document.getElementById('cardNameInput').value.trim() || 'Sai';
+      const relation = document.getElementById('cardRelationInput').value.trim() || "Groom's Friend";
       const msg = document.getElementById('cardMessageInput').value.trim();
       const song = document.getElementById('cardSongInput').value.trim();
       const cardElem = document.getElementById('exportWishCard');
